@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fe80::a4ac:77b5:3d1:c4b0</Value>
+    </Setting>
+    <Setting Name="datenbank" Type="System.String" Scope="User">
+      <Value Profile="(Default)">flow</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
