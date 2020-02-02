@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Security
-Public Class Form1
+Public Class flow
     Dim con As New MySqlConnection
     Dim cmd As New MySqlCommand
     Dim reader As MySqlDataReader
@@ -20,9 +20,15 @@ Public Class Form1
         If angemeldet Then
             AnmeldenToolStripMenuItem.Visible = False
             AbmeldenToolStripMenuItem.Visible = True
+            If rechte.Contains("ADMIN") Then
+                BenutzerverwaltungToolStripMenuItem.Visible = True
+            Else
+                BenutzerverwaltungToolStripMenuItem.Visible = False
+            End If
         Else
             AnmeldenToolStripMenuItem.Visible = True
             AbmeldenToolStripMenuItem.Visible = False
+            BenutzerverwaltungToolStripMenuItem.Visible = False
         End If
         tslInfo.Text = "Angemeldet als " & benutzer
 
@@ -325,16 +331,17 @@ Public Class Form1
 
 
     Private Sub AnmeldenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnmeldenToolStripMenuItem.Click
-        Anmeldung.ShowDialog()
-        If angemeldet Then
-            AnmeldenToolStripMenuItem.Visible = False
-            AbmeldenToolStripMenuItem.Visible = True
-        Else
-            AnmeldenToolStripMenuItem.Visible = True
-            AbmeldenToolStripMenuItem.Visible = False
-        End If
-        fillDGV()
-        tslInfo.Text = "Angemeldet als " & benutzer
+        'Anmeldung.ShowDialog()
+        'If angemeldet Then
+        '    AnmeldenToolStripMenuItem.Visible = False
+        '    AbmeldenToolStripMenuItem.Visible = True
+        'Else
+        '    AnmeldenToolStripMenuItem.Visible = True
+        '    AbmeldenToolStripMenuItem.Visible = False
+        'End If
+        'fillDGV()
+        'tslInfo.Text = "Angemeldet als " & benutzer
+        Form1_Load(New Object, New EventArgs)
     End Sub
 
     Private Sub AbmeldenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbmeldenToolStripMenuItem.Click
@@ -342,6 +349,7 @@ Public Class Form1
         rechte = Nothing
         AnmeldenToolStripMenuItem.Visible = True
         AbmeldenToolStripMenuItem.Visible = False
+        BenutzerverwaltungToolStripMenuItem.Visible = False
         benutzer = Nothing
         passwort = Nothing
         fillDGV()
@@ -369,7 +377,7 @@ Public Class Form1
             con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
 
             cmd.Connection = con
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.staende = staende.sid WHERE aufgaben.aid = " & selectedID & ";"
+            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.staende = staende.sid INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & ";"
             cmd.CommandType = CommandType.Text
             Try
                 con.Open()
@@ -382,7 +390,9 @@ Public Class Form1
                     tbLetzterStand.Text = reader("stand")
                     cbStatus.SelectedItem() = reader("status")
                     cbPrio.SelectedItem() = reader("prio")
-                    cbBearbeiter.SelectedItem() = reader("bearbeiter")
+
+                    cbBearbeiter.SelectedItem() = reader("vorname") & " " & reader("nachname")
+
                     cbKategorie.SelectedItem() = reader("kategorie")
 
                 Loop
@@ -418,8 +428,8 @@ Public Class Form1
                 End If
             Next
             cmd.Connection = con '" & cbBearbeiter.SelectedItem.ToString & "
-            cmd.CommandText = "INSERT INTO aufgaben (titel, beschreibung, bearbeiter, ticketnr, status, prio, kategorie, bearbeitet) VALUES ('" & tbneuTitel.Text & "', '" & tbneuBeschreibung.Text &
-                "', (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), '" & tbneuTicketNr.Text & "', '" & cbNeuStatus.SelectedItem.ToString & "', '" & cbNeuPrio.SelectedItem.ToString &
+            cmd.CommandText = "INSERT INTO aufgaben (titel, beschreibung, bearbeiter, ticketnr, status, prio, kategorie, bearbeitet) VALUES ('" & tbNeuTitel.Text & "', '" & tbNeuBeschreibung.Text &
+                "', (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), '" & tbNeuTicketNr.Text & "', '" & cbNeuStatus.SelectedItem.ToString & "', '" & cbNeuPrio.SelectedItem.ToString &
                 "', '" & cbNeuKategorie.SelectedItem.ToString & "', NOW());"
             cmd.CommandType = CommandType.Text
             MsgBox(cmd.CommandText)
@@ -457,5 +467,9 @@ Public Class Form1
     Private Sub dgvUebersicht_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUebersicht.CellDoubleClick
         tpBearbeiten_Enter(New Object, New EventArgs)
         TabControl1.SelectedIndex = 1
+    End Sub
+
+    Private Sub BenutzerverwaltungToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BenutzerverwaltungToolStripMenuItem.Click
+        Benutzerverwaltung.Show()
     End Sub
 End Class

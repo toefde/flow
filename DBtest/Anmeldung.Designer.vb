@@ -117,9 +117,9 @@ Partial Class Anmeldung
         'login
         '
         Me.login.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.login.Location = New System.Drawing.Point(363, 318)
+        Me.login.Location = New System.Drawing.Point(347, 307)
         Me.login.Name = "login"
-        Me.login.Size = New System.Drawing.Size(114, 38)
+        Me.login.Size = New System.Drawing.Size(130, 50)
         Me.login.TabIndex = 2
         Me.login.Text = "Anmelden"
         Me.login.UseVisualStyleBackColor = True
@@ -128,7 +128,7 @@ Partial Class Anmeldung
         '
         Me.Button1.Location = New System.Drawing.Point(179, 307)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(131, 49)
+        Me.Button1.Size = New System.Drawing.Size(130, 50)
         Me.Button1.TabIndex = 9
         Me.Button1.Text = "ADMIN"
         Me.Button1.UseVisualStyleBackColor = True
@@ -162,7 +162,7 @@ Partial Class Anmeldung
         '
         Me.Button2.Location = New System.Drawing.Point(33, 307)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(131, 49)
+        Me.Button2.Size = New System.Drawing.Size(130, 50)
         Me.Button2.TabIndex = 12
         Me.Button2.Text = "DATENPFLEGER"
         Me.Button2.UseVisualStyleBackColor = True

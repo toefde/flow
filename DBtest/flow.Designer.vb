@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class flow
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
@@ -22,7 +22,7 @@ Partial Class Form1
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.cbStatus = New System.Windows.Forms.ComboBox()
         Me.cbNeuStatus = New System.Windows.Forms.ComboBox()
         Me.cbNeuPrio = New System.Windows.Forms.ComboBox()
@@ -32,6 +32,7 @@ Partial Class Form1
         Me.AnmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AbmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BeendenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BenutzerverwaltungToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tslInfo = New System.Windows.Forms.ToolStripLabel()
@@ -90,7 +91,7 @@ Partial Class Form1
         Me.cbNeuStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNeuStatus.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbNeuStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.cbNeuStatus.Location = New System.Drawing.Point(816, 30)
+        Me.cbNeuStatus.Location = New System.Drawing.Point(691, 30)
         Me.cbNeuStatus.Name = "cbNeuStatus"
         Me.cbNeuStatus.Size = New System.Drawing.Size(189, 28)
         Me.cbNeuStatus.TabIndex = 33
@@ -100,7 +101,7 @@ Partial Class Form1
         Me.cbNeuPrio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNeuPrio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbNeuPrio.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.cbNeuPrio.Location = New System.Drawing.Point(1020, 30)
+        Me.cbNeuPrio.Location = New System.Drawing.Point(895, 30)
         Me.cbNeuPrio.Name = "cbNeuPrio"
         Me.cbNeuPrio.Size = New System.Drawing.Size(288, 28)
         Me.cbNeuPrio.TabIndex = 37
@@ -127,7 +128,7 @@ Partial Class Form1
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnmeldenToolStripMenuItem, Me.AbmeldenToolStripMenuItem, Me.BeendenToolStripMenuItem, Me.InfoToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnmeldenToolStripMenuItem, Me.AbmeldenToolStripMenuItem, Me.BeendenToolStripMenuItem, Me.BenutzerverwaltungToolStripMenuItem, Me.InfoToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1484, 29)
@@ -155,6 +156,13 @@ Partial Class Form1
         Me.BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem"
         Me.BeendenToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
         Me.BeendenToolStripMenuItem.Text = "Beenden"
+        '
+        'BenutzerverwaltungToolStripMenuItem
+        '
+        Me.BenutzerverwaltungToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.BenutzerverwaltungToolStripMenuItem.Name = "BenutzerverwaltungToolStripMenuItem"
+        Me.BenutzerverwaltungToolStripMenuItem.Size = New System.Drawing.Size(161, 25)
+        Me.BenutzerverwaltungToolStripMenuItem.Text = "Benutzerverwaltung"
         '
         'InfoToolStripMenuItem
         '
@@ -228,14 +236,14 @@ Partial Class Form1
         Me.dgvUebersicht.AllowUserToAddRows = False
         Me.dgvUebersicht.AllowUserToDeleteRows = False
         Me.dgvUebersicht.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvUebersicht.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvUebersicht.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvUebersicht.Location = New System.Drawing.Point(6, 62)
         Me.dgvUebersicht.MultiSelect = False
         Me.dgvUebersicht.Name = "dgvUebersicht"
@@ -344,7 +352,7 @@ Partial Class Form1
         '
         Me.tbBeschreibung.Enabled = False
         Me.tbBeschreibung.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbBeschreibung.Location = New System.Drawing.Point(8, 150)
+        Me.tbBeschreibung.Location = New System.Drawing.Point(7, 150)
         Me.tbBeschreibung.Multiline = True
         Me.tbBeschreibung.Name = "tbBeschreibung"
         Me.tbBeschreibung.Size = New System.Drawing.Size(650, 250)
@@ -353,7 +361,7 @@ Partial Class Form1
         'tbTitel
         '
         Me.tbTitel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbTitel.Location = New System.Drawing.Point(6, 30)
+        Me.tbTitel.Location = New System.Drawing.Point(7, 30)
         Me.tbTitel.Name = "tbTitel"
         Me.tbTitel.Size = New System.Drawing.Size(652, 26)
         Me.tbTitel.TabIndex = 15
@@ -372,7 +380,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label1.Location = New System.Drawing.Point(8, 7)
+        Me.Label1.Location = New System.Drawing.Point(7, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 20)
         Me.Label1.TabIndex = 17
@@ -391,7 +399,7 @@ Partial Class Form1
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label2.Location = New System.Drawing.Point(8, 127)
+        Me.Label2.Location = New System.Drawing.Point(7, 127)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(107, 20)
         Me.Label2.TabIndex = 18
@@ -400,7 +408,7 @@ Partial Class Form1
         'tbTicketNr
         '
         Me.tbTicketNr.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbTicketNr.Location = New System.Drawing.Point(8, 94)
+        Me.tbTicketNr.Location = New System.Drawing.Point(7, 94)
         Me.tbTicketNr.Name = "tbTicketNr"
         Me.tbTicketNr.Size = New System.Drawing.Size(263, 26)
         Me.tbTicketNr.TabIndex = 19
@@ -409,7 +417,7 @@ Partial Class Form1
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label3.Location = New System.Drawing.Point(8, 71)
+        Me.Label3.Location = New System.Drawing.Point(7, 71)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(60, 20)
         Me.Label3.TabIndex = 20
@@ -441,7 +449,7 @@ Partial Class Form1
         Me.cbNeuBearbeiter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNeuBearbeiter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbNeuBearbeiter.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.cbNeuBearbeiter.Location = New System.Drawing.Point(816, 88)
+        Me.cbNeuBearbeiter.Location = New System.Drawing.Point(691, 88)
         Me.cbNeuBearbeiter.Name = "cbNeuBearbeiter"
         Me.cbNeuBearbeiter.Size = New System.Drawing.Size(189, 28)
         Me.cbNeuBearbeiter.TabIndex = 41
@@ -451,7 +459,7 @@ Partial Class Form1
         Me.cbNeuKategorie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNeuKategorie.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbNeuKategorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.cbNeuKategorie.Location = New System.Drawing.Point(1020, 88)
+        Me.cbNeuKategorie.Location = New System.Drawing.Point(895, 88)
         Me.cbNeuKategorie.Name = "cbNeuKategorie"
         Me.cbNeuKategorie.Size = New System.Drawing.Size(288, 28)
         Me.cbNeuKategorie.TabIndex = 40
@@ -469,25 +477,25 @@ Partial Class Form1
         'tbNeuBeschreibung
         '
         Me.tbNeuBeschreibung.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbNeuBeschreibung.Location = New System.Drawing.Point(6, 88)
+        Me.tbNeuBeschreibung.Location = New System.Drawing.Point(7, 150)
         Me.tbNeuBeschreibung.Multiline = True
         Me.tbNeuBeschreibung.Name = "tbNeuBeschreibung"
-        Me.tbNeuBeschreibung.Size = New System.Drawing.Size(515, 232)
+        Me.tbNeuBeschreibung.Size = New System.Drawing.Size(650, 250)
         Me.tbNeuBeschreibung.TabIndex = 28
         '
         'tbNeuTitel
         '
         Me.tbNeuTitel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbNeuTitel.Location = New System.Drawing.Point(6, 30)
+        Me.tbNeuTitel.Location = New System.Drawing.Point(7, 30)
         Me.tbNeuTitel.Name = "tbNeuTitel"
-        Me.tbNeuTitel.Size = New System.Drawing.Size(515, 26)
+        Me.tbNeuTitel.Size = New System.Drawing.Size(652, 26)
         Me.tbNeuTitel.TabIndex = 27
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label6.Location = New System.Drawing.Point(6, 7)
+        Me.Label6.Location = New System.Drawing.Point(7, 7)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(38, 20)
         Me.Label6.TabIndex = 29
@@ -497,7 +505,7 @@ Partial Class Form1
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label7.Location = New System.Drawing.Point(6, 65)
+        Me.Label7.Location = New System.Drawing.Point(7, 127)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(107, 20)
         Me.Label7.TabIndex = 30
@@ -506,7 +514,7 @@ Partial Class Form1
         'tbNeuTicketNr
         '
         Me.tbNeuTicketNr.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.tbNeuTicketNr.Location = New System.Drawing.Point(536, 30)
+        Me.tbNeuTicketNr.Location = New System.Drawing.Point(7, 94)
         Me.tbNeuTicketNr.Name = "tbNeuTicketNr"
         Me.tbNeuTicketNr.Size = New System.Drawing.Size(263, 26)
         Me.tbNeuTicketNr.TabIndex = 31
@@ -515,13 +523,13 @@ Partial Class Form1
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label8.Location = New System.Drawing.Point(532, 7)
+        Me.Label8.Location = New System.Drawing.Point(7, 71)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(60, 20)
         Me.Label8.TabIndex = 32
         Me.Label8.Text = "Ticket#"
         '
-        'Form1
+        'flow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -530,8 +538,8 @@ Partial Class Form1
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "flow"
+        Me.Text = "FLOW"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -590,4 +598,5 @@ Partial Class Form1
     Friend WithEvents btnFilter As Button
     Friend WithEvents Label9 As Label
     Friend WithEvents tbLetzterStand As TextBox
+    Friend WithEvents BenutzerverwaltungToolStripMenuItem As ToolStripMenuItem
 End Class

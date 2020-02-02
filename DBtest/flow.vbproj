@@ -83,11 +83,17 @@
     <Compile Include="Anmeldung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="Benutzerverwaltung.Designer.vb">
+      <DependentUpon>Benutzerverwaltung.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Benutzerverwaltung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="flow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="flow.Designer.vb">
+      <DependentUpon>flow.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -117,8 +123,11 @@
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="Benutzerverwaltung.resx">
+      <DependentUpon>Benutzerverwaltung.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="flow.resx">
+      <DependentUpon>flow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

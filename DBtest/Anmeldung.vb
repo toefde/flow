@@ -22,12 +22,12 @@ Public Class Anmeldung
         Dim reader As MySqlDataReader
 
 
-        Form1.benutzer = tbbenutzer.Text
-        Form1.passwort = tbpasswort.Text
+        flow.benutzer = tbbenutzer.Text.ToString.ToLower
+        flow.passwort = tbpasswort.Text.ToString.ToLower
         My.Settings.server = tbserver.Text
         My.Settings.datenbank = tbdatenbank.Text
 
-        con.ConnectionString = "server=" & tbserver.Text & ";uid=" & Form1.benutzer & ";pwd=" & Form1.passwort & ";database=mysql"
+        con.ConnectionString = "server=" & tbserver.Text & ";uid=" & flow.benutzer & ";pwd=" & flow.passwort & ";database=mysql"
 
 
 
@@ -39,7 +39,7 @@ Public Class Anmeldung
             cmd.ExecuteReader()
             con.Close()
 
-            con.ConnectionString = "server=" & tbserver.Text & ";uid=" & Form1.benutzer & ";pwd=" & Form1.passwort & ";database=" & tbdatenbank.Text
+            con.ConnectionString = "server=" & tbserver.Text & ";uid=" & flow.benutzer & ";pwd=" & flow.passwort & ";database=" & tbdatenbank.Text
             cmd.Connection = con
             cmd.CommandText = "SELECT * FROM flow.benutzer;"
             cmd.CommandType = CommandType.Text
@@ -58,17 +58,17 @@ Public Class Anmeldung
                     datenArr(4) = reader("passwort").ToString
                     datenArr(5) = reader("rechte").ToString
 
-                    If datenArr(1) = Form1.benutzer And datenArr(4) = Form1.passwort Then
-                        Form1.rechte = datenArr(5)
+                    If datenArr(1) = flow.benutzer And datenArr(4) = flow.passwort Then
+                        flow.rechte = datenArr(5)
                         'MsgBox(Form1.rechte)
-                        Form1.angemeldet = True
+                        flow.angemeldet = True
                     End If
                 Loop
 
             Catch ex As Exception
                 MsgBox("Benutzer falsch angelegt!" & vbCrLf & ex.ToString)
             End Try
-            If Not Form1.angemeldet Then
+            If Not flow.angemeldet Then
                 MsgBox("Benutzer falsch angelegt!")
                 Exit Sub
             End If
