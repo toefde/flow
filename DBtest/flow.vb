@@ -128,7 +128,8 @@ Public Class flow
             con.Open()
             reader = cmd.ExecuteReader
             reader.Read()
-            Dim anzahl As Integer = reader("Anzahl")
+            Dim anzahl As Integer = 0
+            anzahl += reader("Anzahl")
             con.Close()
             cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON bearbeiter = bid WHERE bearbeiter = (SELECT bid FROM benutzer WHERE benutzername = '" & benutzer & "');"
             dgvUebersicht.Columns.Add("aid", "ID")
@@ -144,7 +145,9 @@ Public Class flow
             dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
             dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
 
-
+            If anzahl = 0 Then
+                anzahl = 1
+            End If
             dgvUebersicht.Rows.Add(anzahl)
 
             Try

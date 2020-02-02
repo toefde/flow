@@ -22,7 +22,7 @@ Partial Class Benutzerverwaltung
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvBenutzerverwaltung = New System.Windows.Forms.DataGridView()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cbBVrechte = New System.Windows.Forms.ComboBox()
@@ -35,7 +35,7 @@ Partial Class Benutzerverwaltung
         Me.tbBVnachname = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnBveraendern = New System.Windows.Forms.Button()
-        Me.btnBvAbrechen = New System.Windows.Forms.Button()
+        Me.btnBvSchliessen = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbBArechte = New System.Windows.Forms.ComboBox()
         Me.tbBAbenutzer = New System.Windows.Forms.TextBox()
@@ -61,14 +61,14 @@ Partial Class Benutzerverwaltung
         Me.dgvBenutzerverwaltung.AllowUserToDeleteRows = False
         Me.dgvBenutzerverwaltung.AllowUserToResizeRows = False
         Me.dgvBenutzerverwaltung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvBenutzerverwaltung.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvBenutzerverwaltung.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvBenutzerverwaltung.Location = New System.Drawing.Point(12, 12)
         Me.dgvBenutzerverwaltung.MultiSelect = False
         Me.dgvBenutzerverwaltung.Name = "dgvBenutzerverwaltung"
@@ -190,16 +190,16 @@ Partial Class Benutzerverwaltung
         Me.btnBveraendern.Text = "Speichern"
         Me.btnBveraendern.UseVisualStyleBackColor = True
         '
-        'btnBvAbrechen
+        'btnBvSchliessen
         '
-        Me.btnBvAbrechen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBvAbrechen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.btnBvAbrechen.Location = New System.Drawing.Point(842, 599)
-        Me.btnBvAbrechen.Name = "btnBvAbrechen"
-        Me.btnBvAbrechen.Size = New System.Drawing.Size(130, 50)
-        Me.btnBvAbrechen.TabIndex = 7
-        Me.btnBvAbrechen.Text = "Abbrechen"
-        Me.btnBvAbrechen.UseVisualStyleBackColor = True
+        Me.btnBvSchliessen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBvSchliessen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.btnBvSchliessen.Location = New System.Drawing.Point(842, 599)
+        Me.btnBvSchliessen.Name = "btnBvSchliessen"
+        Me.btnBvSchliessen.Size = New System.Drawing.Size(130, 50)
+        Me.btnBvSchliessen.TabIndex = 7
+        Me.btnBvSchliessen.Text = "Abbrechen"
+        Me.btnBvSchliessen.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -345,7 +345,7 @@ Partial Class Benutzerverwaltung
         Me.ClientSize = New System.Drawing.Size(984, 661)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.btnBvAbrechen)
+        Me.Controls.Add(Me.btnBvSchliessen)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.dgvBenutzerverwaltung)
         Me.Name = "Benutzerverwaltung"
@@ -367,7 +367,7 @@ Partial Class Benutzerverwaltung
     Friend WithEvents tbBVnachname As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents btnBveraendern As Button
-    Friend WithEvents btnBvAbrechen As Button
+    Friend WithEvents btnBvSchliessen As Button
     Friend WithEvents tbBVbenutzer As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents tbBVpasswort As TextBox
