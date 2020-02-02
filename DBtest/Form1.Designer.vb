@@ -118,7 +118,7 @@ Partial Class Form1
         'btnBearbeitetUpdate
         '
         Me.btnBearbeitetUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBearbeitetUpdate.Location = New System.Drawing.Point(1343, 768)
+        Me.btnBearbeitetUpdate.Location = New System.Drawing.Point(1340, 768)
         Me.btnBearbeitetUpdate.Name = "btnBearbeitetUpdate"
         Me.btnBearbeitetUpdate.Size = New System.Drawing.Size(130, 50)
         Me.btnBearbeitetUpdate.TabIndex = 1
@@ -324,7 +324,7 @@ Partial Class Form1
         'btnAbbrechenBearbeiten
         '
         Me.btnAbbrechenBearbeiten.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAbbrechenBearbeiten.Location = New System.Drawing.Point(1207, 768)
+        Me.btnAbbrechenBearbeiten.Location = New System.Drawing.Point(1204, 768)
         Me.btnAbbrechenBearbeiten.Name = "btnAbbrechenBearbeiten"
         Me.btnAbbrechenBearbeiten.Size = New System.Drawing.Size(130, 50)
         Me.btnAbbrechenBearbeiten.TabIndex = 2
@@ -458,7 +458,8 @@ Partial Class Form1
         '
         'btnNeuInsert
         '
-        Me.btnNeuInsert.Location = New System.Drawing.Point(1088, 625)
+        Me.btnNeuInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNeuInsert.Location = New System.Drawing.Point(1340, 768)
         Me.btnNeuInsert.Name = "btnNeuInsert"
         Me.btnNeuInsert.Size = New System.Drawing.Size(130, 50)
         Me.btnNeuInsert.TabIndex = 36
