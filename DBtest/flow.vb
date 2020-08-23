@@ -14,6 +14,10 @@ Public Class flow
     Dim prios()
     Dim status()
     Dim benutzerArray(,)
+    Dim VorNachNamen()
+    Dim kategorien()
+    Public data As New List(Of String())
+    Public filteredData As New List(Of String())
     Dim lastSelected As New Point
     Public angemeldet As Boolean = False
     Public db
@@ -41,6 +45,9 @@ Public Class flow
 
         prios = getPrios()
         status = getStatus()
+        kategorien = getKategorien()
+        VorNachNamen = getBenutzer()
+
         Try
             cbStatus.Items.AddRange(status)
             cbNeuStatus.Items.AddRange(status)
@@ -51,13 +58,28 @@ Public Class flow
             cbNeuPrio.SelectedIndex = 0
 
             If angemeldet Then
-                cbKategorie.Items.AddRange(getKategorien)
-                cbNeuKategorie.Items.AddRange(getKategorien)
+                cbKategorie.Items.AddRange(kategorien)
+                cbNeuKategorie.Items.AddRange(kategorien)
                 cbNeuKategorie.SelectedIndex = 0
 
                 cbBearbeiter.Items.AddRange(getBenutzer)
                 cbNeuBearbeiter.Items.AddRange(getBenutzer)
                 cbNeuBearbeiter.SelectedItem = myFullname
+
+                For Each item In status
+                    Filter.sFilter.Add(item, True)
+                Next
+                For Each item In prios
+                    Filter.pFilter.Add(item, True)
+                Next
+                For Each item In VorNachNamen
+                    Filter.bFilter.Add(item, False)
+                    Filter.bFilter.Item(myFullname) = True
+                Next
+                For Each item In kategorien
+                    Filter.kFilter.Add(item, True)
+                Next
+
 
                 For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
                     For Each item As Button In tabp.Controls.OfType(Of Button)
@@ -69,53 +91,32 @@ Public Class flow
         Catch ex As Exception
         End Try
     End Sub
-    Sub fillDGV()
-        dgvUebersicht.Rows.Clear()
-        dgvUebersicht.Columns.Clear()
 
-        If Not angemeldet Then
-            Exit Sub
-        End If
-        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
+    Sub getAllAufgaben()
         If rechte = "ADMIN" Then
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON bearbeiter = bid;"
+            cmd.CommandText = "SELECT aid, titel, beschreibung, status, prio, kategorie, bearbeiter, ticketnr, erstellt, bearbeitet, nachname, vorname FROM aufgaben INNER JOIN benutzer ON bearbeiter = bid;"
         ElseIf rechte = "USER" Then
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE benutzer.benutzername = '" & benutzer & "';"
+            cmd.CommandText = "SELECT aid, titel, beschreibung, status, prio, kategorie, bearbeiter, ticketnr, erstellt, bearbeitet, nachname, vorname FROM aufgaben INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE benutzer.benutzername = '" & benutzer & "';"
         End If
-        dgvUebersicht.Columns.Add("aid", "ID")
-        dgvUebersicht.Columns.Add("titel", "Titel")
-        dgvUebersicht.Columns.Add("beschreibung", "Beschreibung")
-        dgvUebersicht.Columns.Add("status", "Status")
-        dgvUebersicht.Columns.Add("prio", "Priorität")
-        dgvUebersicht.Columns.Add("kategorie", "Kategorie")
-        dgvUebersicht.Columns.Add("stand", "Aktueller Stand")
-        dgvUebersicht.Columns.Add("bearbeiter", "Bearbeiter")
-        dgvUebersicht.Columns.Add("ticketnr", "Ticket#")
-        dgvUebersicht.Columns.Add("erstellt", "Erstelldatum")
-        dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
-        dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-
         Try
+            Dim arr(10) As String
             con.Open()
             reader = cmd.ExecuteReader
             Dim z = 0
             Do While reader.Read
-                dgvUebersicht.Rows.Add(1)
-                z = dgvUebersicht.Rows.Count - 1
-                dgvUebersicht.Rows(z).Cells(0).Value = reader("aid")
-                dgvUebersicht.Rows(z).Cells(1).Value = reader("titel")
-                dgvUebersicht.Rows(z).Cells(2).Value = reader("beschreibung")
-                dgvUebersicht.Rows(z).Cells(3).Value = db.getStatusValue(reader("status"))
-                dgvUebersicht.Rows(z).Cells(4).Value = db.getPrioValue(reader("prio"))
-                dgvUebersicht.Rows(z).Cells(5).Value = db.getKategorieValue(reader("kategorie"))
-                Try
-                    dgvUebersicht.Rows(z).Cells(6).Value = db.getNeusterStandValue(dgvUebersicht.Rows(z).Cells(0).Value)
-                Catch ex As Exception
-                End Try
-                dgvUebersicht.Rows(z).Cells(7).Value = reader("vorname") & " " & reader("nachname")
-                dgvUebersicht.Rows(z).Cells(8).Value = reader("ticketnr")
-                dgvUebersicht.Rows(z).Cells(9).Value = reader("erstellt")
-                dgvUebersicht.Rows(z).Cells(10).Value = reader("bearbeitet")
+                data.Add(New String(10) {})
+                z = data.Count - 1
+                data.Item(z)(0) = reader("aid")
+                data.Item(z)(1) = reader("titel")
+                data.Item(z)(2) = reader("beschreibung")
+                data.Item(z)(3) = db.getStatusValue(reader("status"))
+                data.Item(z)(4) = db.getPrioValue(reader("prio"))
+                data.Item(z)(5) = db.getKategorieValue(reader("kategorie"))
+                data.Item(z)(6) = db.getNeusterStandValue(data.Item(z)(0))
+                data.Item(z)(7) = reader("vorname") & " " & reader("nachname")
+                data.Item(z)(8) = reader("ticketnr")
+                data.Item(z)(9) = reader("erstellt")
+                data.Item(z)(10) = reader("bearbeitet")
             Loop
         Catch ex As Exception
             MsgBox(ex.ToString)
@@ -123,7 +124,104 @@ Public Class flow
             reader.Close()
             con.Close()
         End Try
+    End Sub
 
+    Sub proceedFilter(s() As KeyValuePair(Of String, Boolean), p() As KeyValuePair(Of String, Boolean), b() As KeyValuePair(Of String, Boolean), k() As KeyValuePair(Of String, Boolean))
+        filteredData = data
+        Dim toRemoveRows As New List(Of String())
+        For Each row In data
+            For Each item In s
+                If Not item.Value Then
+                    If item.Key = row(3) Then ' benutzer = aufgabenbearbeiter ?
+                        toRemoveRows.Add(row)
+
+                    End If
+                End If
+            Next
+            For Each item In p
+                If Not item.Value Then
+                    If item.Key = row(4) Then
+                        toRemoveRows.Add(row)
+
+                    End If
+                End If
+            Next
+            For Each item In b
+                If Not item.Value Then
+                    If item.Key = row(7) Then
+                        toRemoveRows.Add(row)
+                    End If
+                End If
+            Next
+            For Each item In k
+                If Not item.Value Then
+                    If item.Key = row(5) Then
+                        toRemoveRows.Add(row)
+
+                    End If
+                End If
+            Next
+        Next
+        For Each item In toRemoveRows
+            filteredData.Remove(item)
+        Next
+    End Sub
+    Sub proceedFilter(bearbeiter() As KeyValuePair(Of String, Boolean))
+        filteredData = data
+        Dim toRemoveRows As New List(Of String())
+        For Each row In data
+            For Each item In bearbeiter
+                If Not item.Value Then
+                    If item.Key = row(7) Then ' benutzer = aufgabenbearbeiter ?
+                        toRemoveRows.Add(row)
+                    End If
+                End If
+            Next
+        Next
+        For Each item In toRemoveRows
+            filteredData.Remove(item)
+        Next
+    End Sub
+
+    Sub fillDGV()
+        dgvUebersicht.Rows.Clear()
+        dgvUebersicht.Columns.Clear()
+        filteredData.Clear()
+
+        If angemeldet Then
+            dgvUebersicht.Columns.Add("aid", "ID")
+            dgvUebersicht.Columns.Add("titel", "Titel")
+            dgvUebersicht.Columns.Add("beschreibung", "Beschreibung")
+            dgvUebersicht.Columns.Add("status", "Status")
+            dgvUebersicht.Columns.Add("prio", "Priorität")
+            dgvUebersicht.Columns.Add("kategorie", "Kategorie")
+            dgvUebersicht.Columns.Add("stand", "Aktueller Stand")
+            dgvUebersicht.Columns.Add("bearbeiter", "Bearbeiter")
+            dgvUebersicht.Columns.Add("ticketnr", "Ticket#")
+            dgvUebersicht.Columns.Add("erstellt", "Erstelldatum")
+            dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
+            dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+
+            getAllAufgaben()
+            proceedFilter(Filter.sFilter.ToArray, Filter.pFilter.ToArray, Filter.bFilter.ToArray, Filter.kFilter.ToArray)
+            'proceedFilter(Filter.bFilter.ToArray)
+
+            For z = 0 To filteredData.Count - 1
+                dgvUebersicht.Rows.Add(1)
+
+                dgvUebersicht.Rows(z).Cells(0).Value = filteredData.Item(z)(0)
+                dgvUebersicht.Rows(z).Cells(1).Value = filteredData.Item(z)(1)
+                dgvUebersicht.Rows(z).Cells(2).Value = filteredData.Item(z)(2)
+                dgvUebersicht.Rows(z).Cells(3).Value = filteredData.Item(z)(3)
+                dgvUebersicht.Rows(z).Cells(4).Value = filteredData.Item(z)(4)
+                dgvUebersicht.Rows(z).Cells(5).Value = filteredData.Item(z)(5)
+                dgvUebersicht.Rows(z).Cells(6).Value = filteredData.Item(z)(6)
+                dgvUebersicht.Rows(z).Cells(7).Value = filteredData.Item(z)(7)
+                dgvUebersicht.Rows(z).Cells(8).Value = filteredData.Item(z)(8)
+                dgvUebersicht.Rows(z).Cells(9).Value = filteredData.Item(z)(9)
+                dgvUebersicht.Rows(z).Cells(10).Value = filteredData.Item(z)(10)
+            Next
+        End If
     End Sub
     Function getBenutzer()
         Dim arrayLaenge As Integer
@@ -329,6 +427,8 @@ Public Class flow
     End Sub
 
     Private Sub tpUebersicht_Enter(sender As Object, e As EventArgs) Handles tpUebersicht.Enter
+        AcceptButton = Nothing
+        CancelButton = Nothing
         fillDGV()
         If angemeldet Then
             Try
@@ -342,7 +442,7 @@ Public Class flow
         'lastSelected.Y = 0
     End Sub
 
-    Private Sub btnNeuInsert_Click(sender As Object, e As EventArgs) Handles btnNeuInsert.Click
+    Private Sub btnNeuInsert_Click(sender As Object, e As EventArgs) Handles btnNeuErstellen.Click
         If tbNeuTitel.Text = "" Or tbNeuBeschreibung.Text = "" Then
             MsgBox("Bitte Felder ausfüllen")
         Else
@@ -376,7 +476,7 @@ Public Class flow
         End If
     End Sub
 
-    Private Sub btnBearbeitetUpdate_Click(sender As Object, e As EventArgs) Handles btnBearbeitetUpdate.Click
+    Private Sub btnBearbeitetUpdate_Click(sender As Object, e As EventArgs) Handles btnBearbeitet.Click
         Try
             Dim temp() = cbBearbeiter.SelectedItem.ToString.Split(" ")
             Dim bname = ""
@@ -407,17 +507,16 @@ Public Class flow
         End If
     End Sub
     Private Sub tpBearbeiten_Enter(sender As Object, e As EventArgs) Handles tpBearbeiten.Enter
+        AcceptButton = btnAbbrechenBearbeiten
+        CancelButton = btnBearbeitet
         clearAllFieldsBearbeiten()
 
         If angemeldet Then
             lastSelected.X = dgvUebersicht.CurrentCellAddress.X
             lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
             Dim selectedID = dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(0).Value
-            con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
 
-            cmd.Connection = con
             cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.aid = staende.aufgabe INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & " ORDER BY staende.erstellt DESC LIMIT 1;"
-            cmd.CommandType = CommandType.Text
             Try
                 con.Open()
                 reader = cmd.ExecuteReader()
@@ -443,6 +542,8 @@ Public Class flow
     End Sub
 
     Private Sub tpAufgabeErstellen_Enter(sender As Object, e As EventArgs) Handles tpAufgabeErstellen.Enter
+        AcceptButton = btnBearbeitet
+        CancelButton = btnAbbrechenBearbeiten
         clearAllFieldsErstellen()
         lastSelected.X = dgvUebersicht.CurrentCellAddress.X
         lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
@@ -461,9 +562,6 @@ Public Class flow
         For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
             For Each item As TextBox In tabp.Controls.OfType(Of TextBox)
                 item.Clear()
-            Next
-            For Each item As ComboBox In tabp.Controls.OfType(Of ComboBox)
-                item.Items.Clear()
             Next
         Next
     End Sub
@@ -501,7 +599,7 @@ Public Class flow
     End Sub
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        MsgBox(db.getBenutzerID(benutzer))
+        Filter.ShowDialog()
     End Sub
 
     Private Sub dgvUebersicht_SelectionChanged(sender As Object, e As EventArgs) Handles dgvUebersicht.SelectionChanged
@@ -542,4 +640,6 @@ Public Class flow
 
 
     End Sub
+
+
 End Class

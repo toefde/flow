@@ -29,7 +29,7 @@ Partial Class flow
         Me.cbNeuStatus = New System.Windows.Forms.ComboBox()
         Me.cbNeuPrio = New System.Windows.Forms.ComboBox()
         Me.cbPrio = New System.Windows.Forms.ComboBox()
-        Me.btnBearbeitetUpdate = New System.Windows.Forms.Button()
+        Me.btnBearbeitet = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.AbmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,7 +73,7 @@ Partial Class flow
         Me.btnAbbrechenErstellen = New System.Windows.Forms.Button()
         Me.cbNeuBearbeiter = New System.Windows.Forms.ComboBox()
         Me.cbNeuKategorie = New System.Windows.Forms.ComboBox()
-        Me.btnNeuInsert = New System.Windows.Forms.Button()
+        Me.btnNeuErstellen = New System.Windows.Forms.Button()
         Me.tbNeuBeschreibung = New System.Windows.Forms.TextBox()
         Me.tbNeuTitel = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -140,21 +140,21 @@ Partial Class flow
         Me.cbPrio.Size = New System.Drawing.Size(288, 28)
         Me.cbPrio.TabIndex = 38
         '
-        'btnBearbeitetUpdate
+        'btnBearbeitet
         '
-        Me.btnBearbeitetUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBearbeitetUpdate.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnBearbeitetUpdate.FlatAppearance.BorderColor = System.Drawing.Color.Silver
-        Me.btnBearbeitetUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
-        Me.btnBearbeitetUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.btnBearbeitetUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBearbeitetUpdate.ForeColor = System.Drawing.Color.Black
-        Me.btnBearbeitetUpdate.Location = New System.Drawing.Point(1340, 768)
-        Me.btnBearbeitetUpdate.Name = "btnBearbeitetUpdate"
-        Me.btnBearbeitetUpdate.Size = New System.Drawing.Size(130, 50)
-        Me.btnBearbeitetUpdate.TabIndex = 1
-        Me.btnBearbeitetUpdate.Text = "Speichern"
-        Me.btnBearbeitetUpdate.UseVisualStyleBackColor = True
+        Me.btnBearbeitet.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBearbeitet.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnBearbeitet.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.btnBearbeitet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.btnBearbeitet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.btnBearbeitet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBearbeitet.ForeColor = System.Drawing.Color.Black
+        Me.btnBearbeitet.Location = New System.Drawing.Point(1340, 768)
+        Me.btnBearbeitet.Name = "btnBearbeitet"
+        Me.btnBearbeitet.Size = New System.Drawing.Size(130, 50)
+        Me.btnBearbeitet.TabIndex = 1
+        Me.btnBearbeitet.Text = "Speichern"
+        Me.btnBearbeitet.UseVisualStyleBackColor = True
         '
         'MenuStrip1
         '
@@ -329,7 +329,7 @@ Partial Class flow
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(130, 50)
         Me.btnFilter.TabIndex = 2
-        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.Text = "Tabellenansicht"
         Me.btnFilter.UseVisualStyleBackColor = True
         '
         'tpBearbeiten
@@ -348,7 +348,7 @@ Partial Class flow
         Me.tpBearbeiten.Controls.Add(Me.btnAbbrechenBearbeiten)
         Me.tpBearbeiten.Controls.Add(Me.btnStaende)
         Me.tpBearbeiten.Controls.Add(Me.tbBeschreibung)
-        Me.tpBearbeiten.Controls.Add(Me.btnBearbeitetUpdate)
+        Me.tpBearbeiten.Controls.Add(Me.btnBearbeitet)
         Me.tpBearbeiten.Controls.Add(Me.tbTitel)
         Me.tpBearbeiten.Controls.Add(Me.Label4)
         Me.tpBearbeiten.Controls.Add(Me.Label1)
@@ -589,7 +589,7 @@ Partial Class flow
         Me.tpAufgabeErstellen.Controls.Add(Me.cbNeuBearbeiter)
         Me.tpAufgabeErstellen.Controls.Add(Me.cbNeuKategorie)
         Me.tpAufgabeErstellen.Controls.Add(Me.cbNeuPrio)
-        Me.tpAufgabeErstellen.Controls.Add(Me.btnNeuInsert)
+        Me.tpAufgabeErstellen.Controls.Add(Me.btnNeuErstellen)
         Me.tpAufgabeErstellen.Controls.Add(Me.tbNeuBeschreibung)
         Me.tpAufgabeErstellen.Controls.Add(Me.tbNeuTitel)
         Me.tpAufgabeErstellen.Controls.Add(Me.Label6)
@@ -684,21 +684,21 @@ Partial Class flow
         Me.cbNeuKategorie.Size = New System.Drawing.Size(288, 28)
         Me.cbNeuKategorie.TabIndex = 40
         '
-        'btnNeuInsert
+        'btnNeuErstellen
         '
-        Me.btnNeuInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnNeuInsert.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnNeuInsert.FlatAppearance.BorderColor = System.Drawing.Color.Silver
-        Me.btnNeuInsert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
-        Me.btnNeuInsert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.btnNeuInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNeuInsert.ForeColor = System.Drawing.Color.Black
-        Me.btnNeuInsert.Location = New System.Drawing.Point(1340, 768)
-        Me.btnNeuInsert.Name = "btnNeuInsert"
-        Me.btnNeuInsert.Size = New System.Drawing.Size(130, 50)
-        Me.btnNeuInsert.TabIndex = 36
-        Me.btnNeuInsert.Text = "Erstellen"
-        Me.btnNeuInsert.UseVisualStyleBackColor = True
+        Me.btnNeuErstellen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNeuErstellen.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnNeuErstellen.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.btnNeuErstellen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.btnNeuErstellen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.btnNeuErstellen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNeuErstellen.ForeColor = System.Drawing.Color.Black
+        Me.btnNeuErstellen.Location = New System.Drawing.Point(1340, 768)
+        Me.btnNeuErstellen.Name = "btnNeuErstellen"
+        Me.btnNeuErstellen.Size = New System.Drawing.Size(130, 50)
+        Me.btnNeuErstellen.TabIndex = 36
+        Me.btnNeuErstellen.Text = "Erstellen"
+        Me.btnNeuErstellen.UseVisualStyleBackColor = True
         '
         'tbNeuBeschreibung
         '
@@ -795,7 +795,7 @@ Partial Class flow
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnBearbeitetUpdate As Button
+    Friend WithEvents btnBearbeitet As Button
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents AnmeldenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AbmeldenToolStripMenuItem As ToolStripMenuItem
@@ -816,7 +816,7 @@ Partial Class flow
     Friend WithEvents Label3 As Label
     Friend WithEvents btnStaende As Button
     Friend WithEvents tpAufgabeErstellen As TabPage
-    Friend WithEvents btnNeuInsert As Button
+    Friend WithEvents btnNeuErstellen As Button
     Friend WithEvents tbNeuBeschreibung As TextBox
     Friend WithEvents tbNeuTitel As TextBox
     Friend WithEvents Label6 As Label

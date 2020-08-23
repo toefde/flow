@@ -95,7 +95,7 @@ Public Class Anmeldung
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         tbbenutzer.Text = "admin"
-        tbpasswort.Text = "tf300t"
+        tbpasswort.Text = "toefde"
         login_Click(New Object, New EventArgs)
     End Sub
 

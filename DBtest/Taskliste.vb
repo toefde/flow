@@ -19,7 +19,7 @@ wer hat aufgabe erstellt feld in db
 
 
 
-
+Einjstellungen colors und so
 
 
 
