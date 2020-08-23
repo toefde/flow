@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Anmeldung
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Anmeldung
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.tbbenutzer = New System.Windows.Forms.TextBox()
@@ -33,17 +33,22 @@ Partial Class Anmeldung
         Me.Label4 = New System.Windows.Forms.Label()
         Me.login = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnSchliessen = New System.Windows.Forms.Button()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.StatusStrip1.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbbenutzer
         '
+        Me.tbbenutzer.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.tbbenutzer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbbenutzer.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
+        Me.tbbenutzer.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.tbbenutzer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.tbbenutzer.ForeColor = System.Drawing.Color.White
         Me.tbbenutzer.Location = New System.Drawing.Point(117, 52)
         Me.tbbenutzer.Name = "tbbenutzer"
         Me.tbbenutzer.Size = New System.Drawing.Size(360, 26)
@@ -51,7 +56,10 @@ Partial Class Anmeldung
         '
         'tbpasswort
         '
+        Me.tbpasswort.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.tbpasswort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbpasswort.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.tbpasswort.ForeColor = System.Drawing.Color.White
         Me.tbpasswort.Location = New System.Drawing.Point(117, 118)
         Me.tbpasswort.Name = "tbpasswort"
         Me.tbpasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(63)
@@ -60,7 +68,10 @@ Partial Class Anmeldung
         '
         'tbserver
         '
+        Me.tbserver.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.tbserver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbserver.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.tbserver.ForeColor = System.Drawing.Color.White
         Me.tbserver.Location = New System.Drawing.Point(117, 190)
         Me.tbserver.Name = "tbserver"
         Me.tbserver.Size = New System.Drawing.Size(360, 26)
@@ -68,7 +79,10 @@ Partial Class Anmeldung
         '
         'tbdatenbank
         '
+        Me.tbdatenbank.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.tbdatenbank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbdatenbank.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.tbdatenbank.ForeColor = System.Drawing.Color.White
         Me.tbdatenbank.Location = New System.Drawing.Point(117, 263)
         Me.tbdatenbank.Name = "tbdatenbank"
         Me.tbdatenbank.Size = New System.Drawing.Size(360, 26)
@@ -116,64 +130,88 @@ Partial Class Anmeldung
         '
         'login
         '
+        Me.login.BackColor = System.Drawing.Color.Gainsboro
+        Me.login.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.login.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.login.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.login.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.login.ForeColor = System.Drawing.Color.Black
         Me.login.Location = New System.Drawing.Point(347, 307)
         Me.login.Name = "login"
         Me.login.Size = New System.Drawing.Size(130, 50)
         Me.login.TabIndex = 2
         Me.login.Text = "Anmelden"
-        Me.login.UseVisualStyleBackColor = True
+        Me.login.UseVisualStyleBackColor = False
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(179, 307)
+        Me.Button1.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(211, 307)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(130, 50)
         Me.Button1.TabIndex = 9
         Me.Button1.Text = "ADMIN"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'StatusStrip1
+        'Timer1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripProgressBar1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 370)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(489, 22)
-        Me.StatusStrip1.TabIndex = 11
-        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'btnSchliessen
+        '
+        Me.btnSchliessen.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnSchliessen.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnSchliessen.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.btnSchliessen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.btnSchliessen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.btnSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSchliessen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSchliessen.ForeColor = System.Drawing.Color.Black
+        Me.btnSchliessen.Location = New System.Drawing.Point(17, 307)
+        Me.btnSchliessen.Name = "btnSchliessen"
+        Me.btnSchliessen.Size = New System.Drawing.Size(130, 50)
+        Me.btnSchliessen.TabIndex = 12
+        Me.btnSchliessen.Text = "Abbrechen"
+        Me.btnSchliessen.UseVisualStyleBackColor = True
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer))
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripProgressBar1})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 367)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(489, 25)
+        Me.ToolStrip1.TabIndex = 13
+        Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(109, 17)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(109, 20)
         Me.ToolStripStatusLabel1.Text = "Keine Verbindung..."
         '
         'ToolStripProgressBar1
         '
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(350, 16)
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(350, 22)
         Me.ToolStripProgressBar1.Step = 100
         Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         '
-        'Timer1
-        '
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(33, 307)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(130, 50)
-        Me.Button2.TabIndex = 12
-        Me.Button2.Text = "DATENPFLEGER"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'Anmeldung
         '
+        Me.AcceptButton = Me.login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.CancelButton = Me.btnSchliessen
         Me.ClientSize = New System.Drawing.Size(489, 392)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.btnSchliessen)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.login)
         Me.Controls.Add(Me.Label4)
@@ -184,11 +222,12 @@ Partial Class Anmeldung
         Me.Controls.Add(Me.tbserver)
         Me.Controls.Add(Me.tbpasswort)
         Me.Controls.Add(Me.tbbenutzer)
+        Me.ForeColor = System.Drawing.Color.White
         Me.Name = "Anmeldung"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Anmeldung"
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -204,9 +243,9 @@ Partial Class Anmeldung
     Friend WithEvents Label4 As Label
     Friend WithEvents login As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnSchliessen As Button
+    Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents Button2 As Button
 End Class

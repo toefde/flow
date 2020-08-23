@@ -83,12 +83,19 @@
     <Compile Include="Anmeldung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Benutzerverwaltung.Designer.vb">
-      <DependentUpon>Benutzerverwaltung.vb</DependentUpon>
+    <Compile Include="Filter.Designer.vb">
+      <DependentUpon>Filter.vb</DependentUpon>
     </Compile>
-    <Compile Include="Benutzerverwaltung.vb">
+    <Compile Include="Filter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Verwaltung.Designer.vb">
+      <DependentUpon>Verwaltung.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Verwaltung.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dbAccess.vb" />
     <Compile Include="flow.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -123,8 +130,11 @@
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Benutzerverwaltung.resx">
-      <DependentUpon>Benutzerverwaltung.vb</DependentUpon>
+    <EmbeddedResource Include="Filter.resx">
+      <DependentUpon>Filter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Verwaltung.resx">
+      <DependentUpon>Verwaltung.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="flow.resx">
       <DependentUpon>flow.vb</DependentUpon>
@@ -140,6 +150,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -150,6 +161,21 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\giphy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kisspng-check-mark-computer-icons-clip-art-green-tick-5ac32cb7a218e4.237956301522740407664.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\index.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\istockphoto-1132722559-170667a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-Check-Mark-Symbol-Right-Tick-Yes-Green-13.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

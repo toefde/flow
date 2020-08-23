@@ -6,58 +6,68 @@ Public Class flow
     Dim reader As MySqlDataReader
     Public benutzer
     Public passwort
+    Public myVorname
+    Public myNachname
+    Public myFullname
     Public rechte As String
     Dim neueAufgabe = False
-    Dim prios() = {"PRIORITÄT AUSWÄHLEN", "1 - Dringend | Wichtig", "2 - Dringend | Weniger Wichtig", "3 - Nicht Dringend | Wichtig", "4 - Nicht Dringend | Weniger Wichtig"}
-    Dim status() = {"STATUS AUSWÄHLEN", "Offen", "In Bearbeitung", "Geschlossen"}
+    Dim prios()
+    Dim status()
     Dim benutzerArray(,)
     Dim lastSelected As New Point
     Public angemeldet As Boolean = False
+    Public db
 
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Anmeldung.ShowDialog()
+        setSettings()
 
         If angemeldet Then
             AnmeldenToolStripMenuItem.Visible = False
             AbmeldenToolStripMenuItem.Visible = True
             If rechte.Contains("ADMIN") Then
-                BenutzerverwaltungToolStripMenuItem.Visible = True
+                VerwaltungToolStripMenuItem.Visible = True
             Else
-                BenutzerverwaltungToolStripMenuItem.Visible = False
+                VerwaltungToolStripMenuItem.Visible = False
             End If
+            db = New dbAccess(benutzer, passwort)
         Else
             AnmeldenToolStripMenuItem.Visible = True
             AbmeldenToolStripMenuItem.Visible = False
-            BenutzerverwaltungToolStripMenuItem.Visible = False
+            VerwaltungToolStripMenuItem.Visible = False
+            db = Nothing
         End If
         tslInfo.Text = "Angemeldet als " & benutzer
 
-        cbStatus.Items.AddRange(status)
-        cbNeuStatus.Items.AddRange(status)
-        cbNeuStatus.SelectedIndex = 0
+        prios = getPrios()
+        status = getStatus()
+        Try
+            cbStatus.Items.AddRange(status)
+            cbNeuStatus.Items.AddRange(status)
+            cbNeuStatus.SelectedIndex = 0
 
-        cbPrio.Items.AddRange(prios)
-        cbNeuPrio.Items.AddRange(prios)
-        cbNeuPrio.SelectedIndex = 0
+            cbPrio.Items.AddRange(prios)
+            cbNeuPrio.Items.AddRange(prios)
+            cbNeuPrio.SelectedIndex = 0
 
-        If angemeldet Then
-            cbKategorie.Items.AddRange(getKategorien)
-            cbNeuKategorie.Items.Add("KATEGORIE AUSWÄHLEN")
-            cbNeuKategorie.Items.AddRange(getKategorien)
-            cbNeuKategorie.SelectedIndex = 0
+            If angemeldet Then
+                cbKategorie.Items.AddRange(getKategorien)
+                cbNeuKategorie.Items.AddRange(getKategorien)
+                cbNeuKategorie.SelectedIndex = 0
 
-            cbBearbeiter.Items.AddRange(getBenutzer)
-            cbNeuBearbeiter.Items.Add("BEARBEITER AUSWÄHLEN")
-            cbNeuBearbeiter.Items.AddRange(getBenutzer)
-            cbNeuBearbeiter.SelectedIndex = 0
+                cbBearbeiter.Items.AddRange(getBenutzer)
+                cbNeuBearbeiter.Items.AddRange(getBenutzer)
+                cbNeuBearbeiter.SelectedItem = myFullname
 
-            If rechte.Contains("ADMIN") Then
-                cbStatus.Items.Add("ABGESCHLOSSEN")
-                cbNeuStatus.Items.Add("ABGESCHLOSSEN")
+                For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
+                    For Each item As Button In tabp.Controls.OfType(Of Button)
+                        item.Enabled = True
+                    Next
+                Next
             End If
-        End If
-        fillDGV()
-
+            ' fillDGV()
+        Catch ex As Exception
+        End Try
     End Sub
     Sub fillDGV()
         dgvUebersicht.Rows.Clear()
@@ -66,116 +76,54 @@ Public Class flow
         If Not angemeldet Then
             Exit Sub
         End If
-        If rechte.Contains("ADMIN") Then
-            con.Close()
-            con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
-            cmd.Connection = con
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = "SELECT COUNT(*) AS Anzahl FROM aufgaben;"
-            con.Open()
-            reader = cmd.ExecuteReader
-            reader.Read()
-            Dim anzahl As Integer = reader("Anzahl")
-            con.Close()
+        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
+        If rechte = "ADMIN" Then
             cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON bearbeiter = bid;"
+        ElseIf rechte = "USER" Then
+            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE benutzer.benutzername = '" & benutzer & "';"
+        End If
+        dgvUebersicht.Columns.Add("aid", "ID")
+        dgvUebersicht.Columns.Add("titel", "Titel")
+        dgvUebersicht.Columns.Add("beschreibung", "Beschreibung")
+        dgvUebersicht.Columns.Add("status", "Status")
+        dgvUebersicht.Columns.Add("prio", "Priorität")
+        dgvUebersicht.Columns.Add("kategorie", "Kategorie")
+        dgvUebersicht.Columns.Add("stand", "Aktueller Stand")
+        dgvUebersicht.Columns.Add("bearbeiter", "Bearbeiter")
+        dgvUebersicht.Columns.Add("ticketnr", "Ticket#")
+        dgvUebersicht.Columns.Add("erstellt", "Erstelldatum")
+        dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
+        dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
 
-            dgvUebersicht.Columns.Add("aid", "ID")
-            dgvUebersicht.Columns.Add("titel", "Titel")
-            dgvUebersicht.Columns.Add("beschreibung", "Beschreibung")
-            dgvUebersicht.Columns.Add("status", "Status")
-            dgvUebersicht.Columns.Add("prio", "Priorität")
-            dgvUebersicht.Columns.Add("kategorie", "Kategorie")
-            dgvUebersicht.Columns.Add("stand", "Aktueller Stand")
-            dgvUebersicht.Columns.Add("bearbeiter", "Bearbeiter")
-            dgvUebersicht.Columns.Add("ticketnr", "Ticket#")
-            dgvUebersicht.Columns.Add("erstellt", "Erstelldatum")
-            dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
-            dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
-
-
-            dgvUebersicht.Rows.Add(anzahl)
-
-            Try
-                con.Open()
-                reader = cmd.ExecuteReader
-                Dim z = 0
-                Do While reader.Read
-                    dgvUebersicht.Rows(z).Cells(0).Value = reader("aid")
-                    dgvUebersicht.Rows(z).Cells(1).Value = reader("titel")
-                    dgvUebersicht.Rows(z).Cells(2).Value = reader("beschreibung")
-                    dgvUebersicht.Rows(z).Cells(3).Value = reader("status")
-                    dgvUebersicht.Rows(z).Cells(4).Value = reader("prio")
-                    dgvUebersicht.Rows(z).Cells(5).Value = reader("kategorie")
-                    dgvUebersicht.Rows(z).Cells(6).Value = reader("staende")
-                    dgvUebersicht.Rows(z).Cells(7).Value = reader("vorname") & " " & reader("nachname")
-                    dgvUebersicht.Rows(z).Cells(8).Value = reader("ticketnr")
-                    dgvUebersicht.Rows(z).Cells(9).Value = reader("erstellt")
-                    dgvUebersicht.Rows(z).Cells(10).Value = reader("bearbeitet")
-
-                    z += 1
-                Loop
-                reader.Close()
-                con.Close()
-
-            Catch ex As Exception
-                MsgBox(ex.ToString)
-            End Try
-        ElseIf rechte.Contains("DATENPFLEGER") Then
-            con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
-            cmd.Connection = con
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = "SELECT COUNT(*) AS Anzahl FROM aufgaben WHERE bearbeiter = (SELECT bid FROM benutzer WHERE benutzername = '" & benutzer & "');"
+        Try
             con.Open()
             reader = cmd.ExecuteReader
-            reader.Read()
-            Dim anzahl As Integer = 0
-            anzahl += reader("Anzahl")
+            Dim z = 0
+            Do While reader.Read
+                dgvUebersicht.Rows.Add(1)
+                z = dgvUebersicht.Rows.Count - 1
+                dgvUebersicht.Rows(z).Cells(0).Value = reader("aid")
+                dgvUebersicht.Rows(z).Cells(1).Value = reader("titel")
+                dgvUebersicht.Rows(z).Cells(2).Value = reader("beschreibung")
+                dgvUebersicht.Rows(z).Cells(3).Value = db.getStatusValue(reader("status"))
+                dgvUebersicht.Rows(z).Cells(4).Value = db.getPrioValue(reader("prio"))
+                dgvUebersicht.Rows(z).Cells(5).Value = db.getKategorieValue(reader("kategorie"))
+                Try
+                    dgvUebersicht.Rows(z).Cells(6).Value = db.getNeusterStandValue(dgvUebersicht.Rows(z).Cells(0).Value)
+                Catch ex As Exception
+                End Try
+                dgvUebersicht.Rows(z).Cells(7).Value = reader("vorname") & " " & reader("nachname")
+                dgvUebersicht.Rows(z).Cells(8).Value = reader("ticketnr")
+                dgvUebersicht.Rows(z).Cells(9).Value = reader("erstellt")
+                dgvUebersicht.Rows(z).Cells(10).Value = reader("bearbeitet")
+            Loop
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            reader.Close()
             con.Close()
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN benutzer ON bearbeiter = bid WHERE bearbeiter = (SELECT bid FROM benutzer WHERE benutzername = '" & benutzer & "');"
-            dgvUebersicht.Columns.Add("aid", "ID")
-            dgvUebersicht.Columns.Add("titel", "Titel")
-            dgvUebersicht.Columns.Add("beschreibung", "Beschreibung")
-            dgvUebersicht.Columns.Add("status", "Status")
-            dgvUebersicht.Columns.Add("prio", "Priorität")
-            dgvUebersicht.Columns.Add("kategorie", "Kategorie")
-            dgvUebersicht.Columns.Add("stand", "Aktueller Stand")
-            dgvUebersicht.Columns.Add("bearbeiter", "Bearbeiter")
-            dgvUebersicht.Columns.Add("ticketnr", "Ticket#")
-            dgvUebersicht.Columns.Add("erstellt", "Erstelldatum")
-            dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
-            dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        End Try
 
-            If anzahl = 0 Then
-                anzahl = 1
-            End If
-            dgvUebersicht.Rows.Add(anzahl)
-
-            Try
-                con.Open()
-                reader = cmd.ExecuteReader
-                Dim z = 0
-                Do While reader.Read
-                    dgvUebersicht.Rows(z).Cells(0).Value = reader("aid")
-                    dgvUebersicht.Rows(z).Cells(1).Value = reader("titel")
-                    dgvUebersicht.Rows(z).Cells(2).Value = reader("beschreibung")
-                    dgvUebersicht.Rows(z).Cells(3).Value = reader("status")
-                    dgvUebersicht.Rows(z).Cells(4).Value = reader("prio")
-                    dgvUebersicht.Rows(z).Cells(5).Value = reader("kategorie")
-                    dgvUebersicht.Rows(z).Cells(6).Value = reader("staende")
-                    dgvUebersicht.Rows(z).Cells(7).Value = reader("vorname") & " " & reader("nachname")
-                    dgvUebersicht.Rows(z).Cells(8).Value = reader("ticketnr")
-                    dgvUebersicht.Rows(z).Cells(9).Value = reader("erstellt")
-                    dgvUebersicht.Rows(z).Cells(10).Value = reader("bearbeitet")
-
-                    z += 1
-                Loop
-                reader.Close()
-                con.Close()
-
-            Catch ex As Exception
-                MsgBox(ex.ToString)
-            End Try
-        End If
     End Sub
     Function getBenutzer()
         Dim arrayLaenge As Integer
@@ -226,110 +174,116 @@ Public Class flow
 
     End Function
     Function getKategorien()
-        Dim arrayLaenge As Integer
+        Dim result As New List(Of String)
         con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
 
         cmd.Connection = con
-        cmd.CommandText = "SELECT COUNT(*) AS Anzahl FROM kategorien;"
-        cmd.CommandType = CommandType.Text
-        Try
-            con.Open()
-            reader = cmd.ExecuteReader()
-            Do While reader.Read
-                arrayLaenge = reader("Anzahl").ToString
-            Loop
-            reader.Close()
-            con.Close()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
-
-        Dim kategorien(arrayLaenge - 1)
-
-
         cmd.CommandText = "SELECT * FROM kategorien;"
         cmd.CommandType = CommandType.Text
-
         Try
             con.Open()
             reader = cmd.ExecuteReader()
-            Dim z = 0
             Do While reader.Read
-                kategorien(z) = reader("kategorie")
-                z += 1
+                result.Add(reader("kategorie"))
             Loop
-            Array.Sort(kategorien)
-            'MsgBox(kategorien(0) & vbCrLf & kategorien(1))
+            Dim res() = result.ToArray
+            Array.Sort(res)
             reader.Close()
             con.Close()
-            Return kategorien
+            Return res
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
+
 
     End Function
 
+    Function getPrios()
+        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
+
+        cmd.Connection = con
+        cmd.CommandText = "SELECT * FROM prio order by pid;"
+        cmd.CommandType = CommandType.Text
+        Dim result As New List(Of String)
+        Try
+            con.Open()
+            reader = cmd.ExecuteReader
+            While reader.Read
+                result.Add(reader("prioritaet"))
+            End While
+            reader.Close()
+            con.Close()
+            Return result.ToArray
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+
+    Function getStatus()
+        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
+
+        cmd.Connection = con
+        cmd.CommandText = "SELECT * FROM status order by sid;"
+        cmd.CommandType = CommandType.Text
+        Dim result As New List(Of String)
+        Try
+            con.Open()
+            reader = cmd.ExecuteReader
+            While reader.Read
+                result.Add(reader("status"))
+            End While
+            reader.Close()
+            con.Close()
+            Return result.ToArray
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+
+
+    Public Function getAllStaendeFrom(aufgabenID As String) As String(,)
+        Dim arrayLaenge = 0
+        cmd.CommandText = "SELECT COUNT(*) AS Anzahl FROM staende WHERE aufgabe = '" & aufgabenID & "';"
+        Try
+            con.Open()
+            reader = cmd.ExecuteReader()
+            reader.Read()
+            arrayLaenge = reader("Anzahl") - 1
+            reader.Close()
+            con.Close()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+
+
+        cmd.CommandText = "SELECT stand, erstellt, bearbeiter FROM staende WHERE aufgabe = '" & aufgabenID & "';"
+        Dim result(arrayLaenge, 2) As String
+        Try
+            con.Open()
+            reader = cmd.ExecuteReader
+
+            For z = 0 To arrayLaenge
+                reader.Read()
+                result(z, 0) = reader("stand").ToString
+                result(z, 1) = reader("erstellt").ToString
+                result(z, 2) = db.getBenutzerValue(reader("bearbeiter"))
+            Next
+            reader.Close()
+            con.Close()
+            Return result
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
     Private Sub Form1_Closing(sender As Object, e As EventArgs) Handles MyBase.Closing
         benutzer = Nothing
         passwort = Nothing
     End Sub
 
-    Private Sub btnBearbeitetUpdate_Click(sender As Object, e As EventArgs) Handles btnBearbeitetUpdate.Click
-        Try
-            con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
-            Dim temp() = cbBearbeiter.SelectedItem.ToString.Split(" ")
-            MsgBox(temp(0) & temp(1))
-            Dim bname
-            'b 0, v 1, n 2
-            For i = 0 To benutzerArray.Length / 3 - 1
-                If temp(0) = benutzerArray(i, 1) And temp(1) = benutzerArray(i, 2) Then
-                    bname = benutzerArray(i, 0)
-                End If
-            Next
-            MsgBox(bname)
-            cmd.Connection = con
-            cmd.CommandText = "UPDATE aufgaben SET titel = '" & tbTitel.Text & "', beschreibung = '" & tbBeschreibung.Text &
-                "', bearbeiter = (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), ticketnr = '" & tbTicketNr.Text & "', status = '" & cbStatus.SelectedItem &
-                "', prio = '" & cbPrio.SelectedIndex & "', kategorie = '" & cbKategorie.SelectedIndex & "' WHERE aid = " & lblID.Text & ";"
-            cmd.CommandType = CommandType.Text
-            con.Open()
-            cmd.ExecuteNonQuery()
-            con.Close()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
-
-
-
-    End Sub
-
-
-    'Private Sub dgv1_RightClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles dgv1.CellMouseUp
-    '    If e.Button <> Windows.Forms.MouseButtons.Right Then Return
-    '    Dim cms = New ContextMenuStrip
-    '    Dim item1 = cms.Items.Add("foo")
-    '    item1.Tag = 1
-    '    AddHandler item1.Click, AddressOf menuChoice
-    '    Dim item2 = cms.Items.Add("bar")
-    '    item2.Tag = 2
-    '    AddHandler item2.Click, AddressOf menuChoice
-    '    '-- etc
-    '    '..
-    '    'cms.Show(dgv1, e.Location)
-
-    'End Sub
     Private Sub menuChoice(ByVal sender As Object, ByVal e As EventArgs)
         Dim item = CType(sender, ToolStripMenuItem)
         Dim selection = CInt(item.Tag)
         '-- etc
-    End Sub
-    Private Sub dgv1_CellEndEdit(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs)
-        Dim p As New Point(0, 0)
-        'p = dgv1.CurrentCellAddress
-        'Dim temp = dgv1.Item(p.X, p.Y).Value
-        'updateDB(p.Y, dgv1.Columns(p.X).HeaderText, temp)
-        ' MsgBox(p.X)
-
     End Sub
 
 
@@ -352,27 +306,109 @@ Public Class flow
         rechte = Nothing
         AnmeldenToolStripMenuItem.Visible = True
         AbmeldenToolStripMenuItem.Visible = False
-        BenutzerverwaltungToolStripMenuItem.Visible = False
+        VerwaltungToolStripMenuItem.Visible = False
         benutzer = Nothing
         passwort = Nothing
         fillDGV()
         tslInfo.Text = "Nicht angemeldet"
+        For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
+            For Each item As TextBox In tabp.Controls.OfType(Of TextBox)
+                item.Clear()
+            Next
+            For Each item As ComboBox In tabp.Controls.OfType(Of ComboBox)
+                item.Items.Clear()
+            Next
+            For Each item As Button In tabp.Controls.OfType(Of Button)
+                item.Enabled = False
+            Next
+        Next
     End Sub
 
-    Private Sub BeendenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BeendenToolStripMenuItem.Click
+    Friend Sub BeendenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BeendenToolStripMenuItem.Click
         Me.Close()
     End Sub
 
     Private Sub tpUebersicht_Enter(sender As Object, e As EventArgs) Handles tpUebersicht.Enter
         fillDGV()
         If angemeldet Then
-            dgvUebersicht.CurrentCell = dgvUebersicht.Rows(lastSelected.Y).Cells(lastSelected.X)
+            Try
+                dgvUebersicht.CurrentCell = dgvUebersicht.Rows(lastSelected.Y).Cells(lastSelected.X)
+            Catch ex As Exception
+                dgvUebersicht.Rows.Add(1)
+            End Try
         End If
+        dgvUebersicht_SelectionChanged(sender, e)
         'lastSelected.X = 0
         'lastSelected.Y = 0
     End Sub
 
+    Private Sub btnNeuInsert_Click(sender As Object, e As EventArgs) Handles btnNeuInsert.Click
+        If tbNeuTitel.Text = "" Or tbNeuBeschreibung.Text = "" Then
+            MsgBox("Bitte Felder ausfüllen")
+        Else
+            Try
+                Dim temp() = cbNeuBearbeiter.SelectedItem.ToString.Split(" ")
+                Dim bname = ""
+                'b 0, v 1, n 2
+                For i = 0 To benutzerArray.Length / 3 - 1
+                    If temp(0) = benutzerArray(i, 1) And temp(1) = benutzerArray(i, 2) Then
+                        bname = benutzerArray(i, 0)
+                    End If
+                Next
+
+
+                cmd.CommandText = "INSERT INTO aufgaben (titel, beschreibung, bearbeiter, ticketnr, status, prio, kategorie, bearbeitet) VALUES ('" & tbNeuTitel.Text & "', '" & tbNeuBeschreibung.Text &
+                    "', (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), '" & tbNeuTicketNr.Text & "', '" & db.getStatusID(cbNeuStatus.SelectedItem.ToString) & "', '" & db.getPrioID(cbNeuPrio.SelectedItem.ToString) &
+                    "', '" & db.getKategorieID(cbNeuKategorie.SelectedItem.ToString) & "', NOW());"
+                con.Open()
+                cmd.ExecuteNonQuery()
+                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('Aufgabe erstellt', '" & db.getAufgabeID(tbNeuTitel.Text) & "', '" & db.getBenutzerID(benutzer) & "');"
+                cmd.ExecuteNonQuery()
+            Catch ex As Exception
+                If angemeldet Then
+                    MsgBox(ex.ToString)
+                Else
+                    MsgBox("Kein Benutzer angemeldet")
+                End If
+            Finally
+                con.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnBearbeitetUpdate_Click(sender As Object, e As EventArgs) Handles btnBearbeitetUpdate.Click
+        Try
+            Dim temp() = cbBearbeiter.SelectedItem.ToString.Split(" ")
+            Dim bname = ""
+            'b 0, v 1, n 2
+            For i = 0 To benutzerArray.Length / 3 - 1 'get in combobox ausgewählter Benutzer
+                If temp(0) = benutzerArray(i, 1) And temp(1) = benutzerArray(i, 2) Then
+                    bname = benutzerArray(i, 0)
+                End If
+            Next
+
+            con.Open()
+            If tbStand.Text <> "" Then
+                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('" & tbStand.Text & "', '" & lblID.Text & "', '" & benutzer & "');"
+                cmd.ExecuteNonQuery()
+            End If
+            cmd.CommandText = "UPDATE aufgaben SET titel = '" & tbTitel.Text & "', beschreibung = '" & tbBeschreibung.Text &
+                "', bearbeiter = '" & db.getBenutzerID(bname) & "', ticketnr = '" & tbTicketNr.Text & "', status = '" & db.getStatusID(cbStatus.SelectedItem) &
+                "', prio = '" & db.getPrioID(cbPrio.SelectedItem) & "', kategorie = '" & db.getKategorieID(cbKategorie.SelectedItem) & "' WHERE aid = " & lblID.Text & ";"
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            con.Close()
+        End Try
+        If tbStand.Text <> "" Then
+            tbLetzterStand.Text = tbStand.Text
+            tbStand.Clear()
+        End If
+    End Sub
     Private Sub tpBearbeiten_Enter(sender As Object, e As EventArgs) Handles tpBearbeiten.Enter
+        clearAllFieldsBearbeiten()
+
         If angemeldet Then
             lastSelected.X = dgvUebersicht.CurrentCellAddress.X
             lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
@@ -380,83 +416,70 @@ Public Class flow
             con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
 
             cmd.Connection = con
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.staende = staende.sid INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & ";"
+            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.aid = staende.aufgabe INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & " ORDER BY staende.erstellt DESC LIMIT 1;"
             cmd.CommandType = CommandType.Text
             Try
                 con.Open()
                 reader = cmd.ExecuteReader()
-                Do While reader.Read
-                    lblID.Text = reader("aid").ToString
-                    tbTitel.Text = reader("titel")
-                    tbBeschreibung.Text = reader("beschreibung")
-                    tbTicketNr.Text = reader("ticketnr")
-                    tbLetzterStand.Text = reader("stand")
-                    cbStatus.SelectedItem() = reader("status")
-                    cbPrio.SelectedItem() = reader("prio")
+                reader.Read()
+                lblID.Text = reader("aid").ToString
+                tbTitel.Text = reader("titel")
+                tbBeschreibung.Text = reader("beschreibung")
+                tbTicketNr.Text = reader("ticketnr")
+                tbLetzterStand.Text = db.getNeusterStandValue(reader("aufgabe"))
+                cbStatus.SelectedItem() = db.getStatusValue(reader("status"))
+                cbPrio.SelectedItem() = db.getPrioValue(reader("prio"))
 
-                    cbBearbeiter.SelectedItem() = reader("vorname") & " " & reader("nachname")
+                cbBearbeiter.SelectedItem() = reader("vorname") & " " & reader("nachname")
 
-                    cbKategorie.SelectedItem() = reader("kategorie")
-
-                Loop
-                reader.Close()
-                con.Close()
+                cbKategorie.SelectedItem() = db.getKategorieValue(reader("kategorie"))
             Catch ex As Exception
                 MsgBox(ex.ToString)
+            Finally
+                reader.Close()
+                con.Close()
             End Try
         End If
     End Sub
 
     Private Sub tpAufgabeErstellen_Enter(sender As Object, e As EventArgs) Handles tpAufgabeErstellen.Enter
+        clearAllFieldsErstellen()
         lastSelected.X = dgvUebersicht.CurrentCellAddress.X
         lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
         'MsgBox("Aufgabe erstellen")
     End Sub
 
-    Private Sub btnNeuInsert_Click(sender As Object, e As EventArgs) Handles btnNeuInsert.Click
 
-        Try
-            con.Close()
-            con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
-            If cbNeuBearbeiter.SelectedItem.ToString.Contains("AUSWÄHLEN") Or cbNeuStatus.SelectedItem.ToString.Contains("AUSWÄHLEN") Or cbNeuPrio.SelectedItem.ToString.Contains("AUSWÄHLEN") Or cbNeuKategorie.SelectedItem.ToString.Contains("AUSWÄHLEN") Then
-                MsgBox("Bearbeiter, Status, Priorität und Kategorie müssen ausgewählt werden!")
-                Exit Sub
-            End If
-            Dim temp() = cbNeuBearbeiter.SelectedItem.ToString.Split(" ")
-            Dim bname
-            'b 0, v 1, n 2
-            For i = 0 To benutzerArray.Length / 3 - 1
-                If temp(0) = benutzerArray(i, 1) And temp(1) = benutzerArray(i, 2) Then
-                    bname = benutzerArray(i, 0)
-                End If
+
+
+    Private Sub btnAbbrechenBearbeiten_Click(sender As Object, e As EventArgs) Handles btnAbbrechenBearbeiten.Click, btnAbbrechenErstellen.Click
+        clearAllFields()
+        TabControl1.SelectedIndex = 0
+    End Sub
+
+    Sub clearAllFields()
+        For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
+            For Each item As TextBox In tabp.Controls.OfType(Of TextBox)
+                item.Clear()
             Next
-            cmd.Connection = con '" & cbBearbeiter.SelectedItem.ToString & "
-            cmd.CommandText = "INSERT INTO aufgaben (titel, beschreibung, bearbeiter, ticketnr, status, prio, kategorie, bearbeitet) VALUES ('" & tbNeuTitel.Text & "', '" & tbNeuBeschreibung.Text &
-                "', (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), '" & tbNeuTicketNr.Text & "', '" & cbNeuStatus.SelectedItem.ToString & "', '" & cbNeuPrio.SelectedItem.ToString &
-                "', '" & cbNeuKategorie.SelectedItem.ToString & "', NOW());"
-            cmd.CommandType = CommandType.Text
-            MsgBox(cmd.CommandText)
-            con.Open()
-            cmd.ExecuteNonQuery()
-            con.Close()
-        Catch ex As Exception
-            If angemeldet Then
-                MsgBox(ex.ToString)
-            Else
-                MsgBox("Kein Benutzer angemeldet")
-            End If
+            For Each item As ComboBox In tabp.Controls.OfType(Of ComboBox)
+                item.Items.Clear()
+            Next
+        Next
+    End Sub
 
-        End Try
-
+    Sub clearAllFieldsBearbeiten()
+        For Each item As TextBox In tpBearbeiten.Controls.OfType(Of TextBox)
+            item.Clear()
+        Next
 
     End Sub
 
+    Sub clearAllFieldsErstellen()
+        For Each item As TextBox In tpAufgabeErstellen.Controls.OfType(Of TextBox)
+            item.Clear()
+        Next
 
-    Private Sub btnAbbrechenBearbeiten_Click(sender As Object, e As EventArgs) Handles btnAbbrechenBearbeiten.Click
-        tbBeschreibung.Clear()
-        tbStand.Clear()
-        tbTitel.Clear()
-        tbTicketNr.Clear()
     End Sub
 
     Private Sub InfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InfoToolStripMenuItem.Click
@@ -465,6 +488,7 @@ Public Class flow
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAktualisieren.Click
         fillDGV()
+        dgvUebersicht_SelectionChanged(sender, e)
     End Sub
 
     Private Sub dgvUebersicht_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUebersicht.CellDoubleClick
@@ -472,7 +496,50 @@ Public Class flow
         TabControl1.SelectedIndex = 1
     End Sub
 
-    Private Sub BenutzerverwaltungToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BenutzerverwaltungToolStripMenuItem.Click
-        Benutzerverwaltung.Show()
+    Private Sub BenutzerverwaltungToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerwaltungToolStripMenuItem.Click
+        Verwaltung.Show()
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        MsgBox(db.getBenutzerID(benutzer))
+    End Sub
+
+    Private Sub dgvUebersicht_SelectionChanged(sender As Object, e As EventArgs) Handles dgvUebersicht.SelectionChanged
+        Dim columnCount = dgvUebersicht.Columns.GetColumnCount(DataGridViewElementStates.None)
+        For r = 0 To dgvUebersicht.Rows.Count - 1
+            For i = 0 To columnCount - 1
+                If CBool(r Mod 2) Then
+                    dgvUebersicht.Rows(r).Cells(i).Style.BackColor = My.Settings.evenRowBackColor
+                Else
+                    dgvUebersicht.Rows(r).Cells(i).Style.BackColor = My.Settings.oddRowBackColor
+                End If
+                dgvUebersicht.Rows(r).Cells(i).Style.ForeColor = My.Settings.evenRowForeColor
+            Next
+        Next
+        For i = 0 To columnCount - 1
+            dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.BackColor = My.Settings.selectedRowBackColor
+            dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.ForeColor = My.Settings.selectetRowForeColor
+        Next
+
+    End Sub
+
+    Private Sub btnStaende_Click(sender As Object, e As EventArgs) Handles btnStaende.Click
+        staendeAnzeigen.Show()
+    End Sub
+    Sub setSettings()
+        With My.Settings
+            .oddRowBackColor = Color.FromArgb(90, 90, 90)
+            .evenRowBackColor = Color.FromArgb(111, 111, 111)
+            .oddRowForeColor = Color.White
+            .evenRowForeColor = Color.White
+            .selectedRowBackColor = Color.FromArgb(26, 145, 26)
+            .selectetRowForeColor = Color.Black
+        End With
+        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
+        cmd.Connection = con
+        cmd.CommandType = CommandType.Text
+
+
+
     End Sub
 End Class

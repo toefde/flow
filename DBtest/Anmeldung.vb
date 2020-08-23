@@ -2,6 +2,10 @@
 Imports System.Security.Cryptography
 
 Public Class Anmeldung
+    Dim con As New MySqlConnection
+    Dim cmd As New MySqlCommand
+    Dim reader As MySqlDataReader
+    Dim d
 
     Private Sub Anmeldung_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tbserver.Text = My.Settings.server
@@ -17,9 +21,7 @@ Public Class Anmeldung
             tbserver.BackColor = Color.Red
             Return
         End If
-        Dim con As New MySqlConnection
-        Dim cmd As New MySqlCommand
-        Dim reader As MySqlDataReader
+
 
 
         flow.benutzer = tbbenutzer.Text.ToString.ToLower
@@ -45,6 +47,7 @@ Public Class Anmeldung
             cmd.CommandType = CommandType.Text
 
             Try 'Wenn Benutzer in mysql.user angelegt ist, prüfe welche Recht über interne flow.benutzer Tabelle
+                d = New dbAccess(flow.benutzer, flow.passwort)
                 con.Open()
                 reader = cmd.ExecuteReader
 
@@ -56,38 +59,43 @@ Public Class Anmeldung
                     datenArr(2) = reader("vorname").ToString
                     datenArr(3) = reader("nachname").ToString
                     datenArr(4) = reader("passwort").ToString
-                    datenArr(5) = reader("rechte").ToString
+                    datenArr(5) = d.getRechteValue(reader("rechte"))
 
                     If datenArr(1) = flow.benutzer And datenArr(4) = flow.passwort Then
                         flow.rechte = datenArr(5)
-                        'MsgBox(Form1.rechte)
                         flow.angemeldet = True
+                        flow.myVorname = datenArr(2)
+                        flow.myNachname = datenArr(3)
+                        flow.myFullname = flow.myVorname & " " & flow.myNachname
                     End If
+
                 Loop
 
             Catch ex As Exception
                 MsgBox("Benutzer falsch angelegt!" & vbCrLf & ex.ToString)
+                con.Close()
             End Try
             If Not flow.angemeldet Then
                 MsgBox("Benutzer falsch angelegt!")
                 Exit Sub
             End If
-            con.Close()
+
             Timer1.Stop()
             Me.Close()
         Catch ex As Exception
             tbbenutzer.BackColor = Color.Red
             tbpasswort.BackColor = Color.Red
             'MsgBox(ex.ToString)
-
+        Finally
+            con.Close()
         End Try
 
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        tbbenutzer.Text = "testuser"
-        tbpasswort.Text = "jo"
+        tbbenutzer.Text = "admin"
+        tbpasswort.Text = "tf300t"
         login_Click(New Object, New EventArgs)
     End Sub
 
@@ -108,9 +116,41 @@ Public Class Anmeldung
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        tbbenutzer.Text = "timmy.test"
-        tbpasswort.Text = "jo"
-        login_Click(New Object, New EventArgs)
+    Private Sub btnSchliessenButton2_Click(sender As Object, e As EventArgs) Handles btnSchliessen.Click
+        Application.Exit()
+        flow.BeendenToolStripMenuItem_Click(sender, e)
+        Close()
+    End Sub
+
+
+
+
+
+    Public Function AES_Encrypt(ByVal input As String, ByVal pass As String) As String
+        Dim AES As New System.Security.Cryptography.RijndaelManaged
+        Dim Hash_AES As New System.Security.Cryptography.MD5CryptoServiceProvider
+        Dim encrypted As String = ""
+        Try
+            Dim hash(31) As Byte
+            Dim temp As Byte() = Hash_AES.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(pass))
+            Array.Copy(temp, 0, hash, 0, 16)
+            Array.Copy(temp, 0, hash, 15, 16)
+            AES.Key = hash
+            AES.Mode = Security.Cryptography.CipherMode.ECB
+            Dim DESEncrypter As System.Security.Cryptography.ICryptoTransform = AES.CreateEncryptor
+            Dim Buffer As Byte() = System.Text.ASCIIEncoding.ASCII.GetBytes(input)
+            encrypted = Convert.ToBase64String(DESEncrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+            Return encrypted
+        Catch ex As Exception
+        End Try
+    End Function
+
+    Private Sub tbpasswort_KeyDown(sender As Object, e As KeyEventArgs) Handles tbpasswort.KeyDown
+        tbbenutzer.BackColor = Color.FromArgb(111, 111, 111)
+        tbpasswort.BackColor = Color.FromArgb(111, 111, 111)
+        If e.KeyData = Keys.Enter Then
+            login_Click(sender, New EventArgs)
+        End If
+        e.Handled = True
     End Sub
 End Class

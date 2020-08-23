@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("fe80::a4ac:77b5:3d1:c4b0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("192.168.0.26")>  _
         Public Property server() As String
             Get
                 Return CType(Me("server"),String)
@@ -75,6 +75,72 @@ Namespace My
             End Get
             Set
                 Me("datenbank") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property oddRowBackColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("oddRowBackColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("oddRowBackColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property evenRowBackColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("evenRowBackColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("evenRowBackColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property oddRowForeColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("oddRowForeColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("oddRowForeColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property evenRowForeColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("evenRowForeColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("evenRowForeColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property selectedRowBackColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("selectedRowBackColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("selectedRowBackColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property selectetRowForeColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("selectetRowForeColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("selectetRowForeColor") = value
             End Set
         End Property
     End Class

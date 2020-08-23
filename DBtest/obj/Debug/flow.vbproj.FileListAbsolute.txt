@@ -39,5 +39,6 @@ D:\source\repos\flow\DBtest\obj\Debug\flow.vbproj.CopyComplete
 D:\source\repos\flow\DBtest\obj\Debug\DBtest.exe
 D:\source\repos\flow\DBtest\obj\Debug\DBtest.xml
 D:\source\repos\flow\DBtest\obj\Debug\DBtest.pdb
-D:\source\repos\flow\DBtest\obj\Debug\DBtest.Benutzerverwaltung.resources
 D:\source\repos\flow\DBtest\obj\Debug\DBtest.FLOW.resources
+D:\source\repos\flow\DBtest\obj\Debug\DBtest.Verwaltung.resources
+D:\source\repos\flow\DBtest\obj\Debug\DBtest.Filter.resources
