@@ -154,9 +154,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.DBtest.My.MySettings
+        Friend ReadOnly Property Settings() As Global.Flow.My.MySettings
             Get
-                Return Global.DBtest.My.MySettings.Default
+                Return Global.Flow.My.MySettings.Default
             End Get
         End Property
     End Module

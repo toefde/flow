@@ -21,6 +21,8 @@ Public Class flow
     Dim lastSelected As New Point
     Public angemeldet As Boolean = False
     Public db
+    Dim ausgefahren = False
+
 
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Anmeldung.ShowDialog()
@@ -66,20 +68,25 @@ Public Class flow
                 cbNeuBearbeiter.Items.AddRange(getBenutzer)
                 cbNeuBearbeiter.SelectedItem = myFullname
 
+                Filter.sFilter.Clear()
+                Filter.pFilter.Clear()
+                Filter.bFilter.Clear()
+                Filter.kFilter.Clear()
                 For Each item In status
                     Filter.sFilter.Add(item, True)
                 Next
                 For Each item In prios
                     Filter.pFilter.Add(item, True)
                 Next
+
                 For Each item In VorNachNamen
                     Filter.bFilter.Add(item, False)
                     Filter.bFilter.Item(myFullname) = True
                 Next
+
                 For Each item In kategorien
                     Filter.kFilter.Add(item, True)
                 Next
-
 
                 For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
                     For Each item As Button In tabp.Controls.OfType(Of Button)
@@ -87,9 +94,10 @@ Public Class flow
                     Next
                 Next
             End If
-            ' fillDGV()
         Catch ex As Exception
         End Try
+        tpUebersicht_Enter(New Object, New EventArgs)
+
     End Sub
 
     Sub getAllAufgaben()
@@ -202,26 +210,41 @@ Public Class flow
             dgvUebersicht.Columns.Add("bearbeitet", "Änderungsdatum")
             dgvUebersicht.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
 
+            Filter.spalten.Clear()
+            Filter.clbSpalten.Items.Clear()
+            For Each item In dgvUebersicht.Columns
+                Filter.clbSpalten.Items.Add(item.headertext)
+                Filter.spalten.Add(item.headertext, True)
+            Next
+
+
             getAllAufgaben()
             proceedFilter(Filter.sFilter.ToArray, Filter.pFilter.ToArray, Filter.bFilter.ToArray, Filter.kFilter.ToArray)
             'proceedFilter(Filter.bFilter.ToArray)
 
-            For z = 0 To filteredData.Count - 1
+            If filteredData.Count = 0 Then
                 dgvUebersicht.Rows.Add(1)
+            Else
+                For z = 0 To filteredData.Count - 1
+                    dgvUebersicht.Rows.Add(1)
 
-                dgvUebersicht.Rows(z).Cells(0).Value = filteredData.Item(z)(0)
-                dgvUebersicht.Rows(z).Cells(1).Value = filteredData.Item(z)(1)
-                dgvUebersicht.Rows(z).Cells(2).Value = filteredData.Item(z)(2)
-                dgvUebersicht.Rows(z).Cells(3).Value = filteredData.Item(z)(3)
-                dgvUebersicht.Rows(z).Cells(4).Value = filteredData.Item(z)(4)
-                dgvUebersicht.Rows(z).Cells(5).Value = filteredData.Item(z)(5)
-                dgvUebersicht.Rows(z).Cells(6).Value = filteredData.Item(z)(6)
-                dgvUebersicht.Rows(z).Cells(7).Value = filteredData.Item(z)(7)
-                dgvUebersicht.Rows(z).Cells(8).Value = filteredData.Item(z)(8)
-                dgvUebersicht.Rows(z).Cells(9).Value = filteredData.Item(z)(9)
-                dgvUebersicht.Rows(z).Cells(10).Value = filteredData.Item(z)(10)
-            Next
+                    dgvUebersicht.Rows(z).Cells(0).Value = filteredData.Item(z)(0)
+                    dgvUebersicht.Rows(z).Cells(1).Value = filteredData.Item(z)(1)
+                    dgvUebersicht.Rows(z).Cells(2).Value = filteredData.Item(z)(2)
+                    dgvUebersicht.Rows(z).Cells(3).Value = filteredData.Item(z)(3)
+                    dgvUebersicht.Rows(z).Cells(4).Value = filteredData.Item(z)(4)
+                    dgvUebersicht.Rows(z).Cells(5).Value = filteredData.Item(z)(5)
+                    dgvUebersicht.Rows(z).Cells(6).Value = filteredData.Item(z)(6)
+                    dgvUebersicht.Rows(z).Cells(7).Value = filteredData.Item(z)(7)
+                    dgvUebersicht.Rows(z).Cells(8).Value = filteredData.Item(z)(8)
+                    dgvUebersicht.Rows(z).Cells(9).Value = filteredData.Item(z)(9)
+                    dgvUebersicht.Rows(z).Cells(10).Value = filteredData.Item(z)(10)
+                Next
+            End If
+
         End If
+
+        dgvUebersicht_SelectionChanged(New Object, New EventArgs)
     End Sub
     Function getBenutzer()
         Dim arrayLaenge As Integer
@@ -246,7 +269,7 @@ Public Class flow
         Dim nutzer(arrayLaenge - 1, 2)
         Dim bnutzer(arrayLaenge - 1)
 
-        cmd.CommandText = "SELECT * FROM benutzer ORDER BY benutzername ASC;"
+        cmd.CommandText = "SELECT benutzername, vorname, nachname FROM benutzer ORDER BY benutzername ASC;"
         cmd.CommandType = CommandType.Text
 
         Try
@@ -339,6 +362,8 @@ Public Class flow
     End Function
 
 
+
+
     Public Function getAllStaendeFrom(aufgabenID As String) As String(,)
         Dim arrayLaenge = 0
         cmd.CommandText = "SELECT COUNT(*) AS Anzahl FROM staende WHERE aufgabe = '" & aufgabenID & "';"
@@ -386,16 +411,6 @@ Public Class flow
 
 
     Private Sub AnmeldenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnmeldenToolStripMenuItem.Click
-        'Anmeldung.ShowDialog()
-        'If angemeldet Then
-        '    AnmeldenToolStripMenuItem.Visible = False
-        '    AbmeldenToolStripMenuItem.Visible = True
-        'Else
-        '    AnmeldenToolStripMenuItem.Visible = True
-        '    AbmeldenToolStripMenuItem.Visible = False
-        'End If
-        'fillDGV()
-        'tslInfo.Text = "Angemeldet als " & benutzer
         Form1_Load(New Object, New EventArgs)
     End Sub
 
@@ -473,6 +488,7 @@ Public Class flow
             Finally
                 con.Close()
             End Try
+            TabControl1.SelectedTab = tpUebersicht
         End If
     End Sub
 
@@ -489,7 +505,7 @@ Public Class flow
 
             con.Open()
             If tbStand.Text <> "" Then
-                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('" & tbStand.Text & "', '" & lblID.Text & "', '" & benutzer & "');"
+                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('" & tbStand.Text & "', '" & lblID.Text & "', '" & db.getBenutzerID(benutzer) & "');"
                 cmd.ExecuteNonQuery()
             End If
             cmd.CommandText = "UPDATE aufgaben SET titel = '" & tbTitel.Text & "', beschreibung = '" & tbBeschreibung.Text &
@@ -505,39 +521,44 @@ Public Class flow
             tbLetzterStand.Text = tbStand.Text
             tbStand.Clear()
         End If
+        btnAbbrechenBearbeiten_Click(New Object, New EventArgs)
     End Sub
     Private Sub tpBearbeiten_Enter(sender As Object, e As EventArgs) Handles tpBearbeiten.Enter
-        AcceptButton = btnAbbrechenBearbeiten
-        CancelButton = btnBearbeitet
-        clearAllFieldsBearbeiten()
+        If dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(0).Value <> Nothing Then
+            AcceptButton = btnAbbrechenBearbeiten
+            CancelButton = btnBearbeitet
+            clearAllFieldsBearbeiten()
 
-        If angemeldet Then
-            lastSelected.X = dgvUebersicht.CurrentCellAddress.X
-            lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
-            Dim selectedID = dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(0).Value
+            If angemeldet Then
+                lastSelected.X = dgvUebersicht.CurrentCellAddress.X
+                lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
+                Dim selectedID = dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(0).Value
 
-            cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.aid = staende.aufgabe INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & " ORDER BY staende.erstellt DESC LIMIT 1;"
-            Try
-                con.Open()
-                reader = cmd.ExecuteReader()
-                reader.Read()
-                lblID.Text = reader("aid").ToString
-                tbTitel.Text = reader("titel")
-                tbBeschreibung.Text = reader("beschreibung")
-                tbTicketNr.Text = reader("ticketnr")
-                tbLetzterStand.Text = db.getNeusterStandValue(reader("aufgabe"))
-                cbStatus.SelectedItem() = db.getStatusValue(reader("status"))
-                cbPrio.SelectedItem() = db.getPrioValue(reader("prio"))
+                cmd.CommandText = "SELECT * FROM aufgaben INNER JOIN staende ON aufgaben.aid = staende.aufgabe INNER JOIN benutzer ON aufgaben.bearbeiter = benutzer.bid WHERE aufgaben.aid = " & selectedID & " ORDER BY staende.erstellt DESC LIMIT 1;"
+                Try
+                    con.Open()
+                    reader = cmd.ExecuteReader()
+                    reader.Read()
+                    lblID.Text = reader("aid").ToString
+                    tbTitel.Text = reader("titel")
+                    tbBeschreibung.Text = reader("beschreibung")
+                    tbTicketNr.Text = reader("ticketnr")
+                    tbLetzterStand.Text = db.getNeusterStandValue(reader("aufgabe"))
+                    cbStatus.SelectedItem() = db.getStatusValue(reader("status"))
+                    cbPrio.SelectedItem() = db.getPrioValue(reader("prio"))
 
-                cbBearbeiter.SelectedItem() = reader("vorname") & " " & reader("nachname")
+                    cbBearbeiter.SelectedItem() = reader("vorname") & " " & reader("nachname")
 
-                cbKategorie.SelectedItem() = db.getKategorieValue(reader("kategorie"))
-            Catch ex As Exception
-                MsgBox(ex.ToString)
-            Finally
-                reader.Close()
-                con.Close()
-            End Try
+                    cbKategorie.SelectedItem() = db.getKategorieValue(reader("kategorie"))
+                Catch ex As Exception
+                    MsgBox(ex.ToString)
+                Finally
+                    reader.Close()
+                    con.Close()
+                End Try
+            End If
+        Else
+
         End If
     End Sub
 
@@ -547,7 +568,6 @@ Public Class flow
         clearAllFieldsErstellen()
         lastSelected.X = dgvUebersicht.CurrentCellAddress.X
         lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y
-        'MsgBox("Aufgabe erstellen")
     End Sub
 
 
@@ -584,7 +604,7 @@ Public Class flow
         MsgBox("Angemeldet: " & benutzer & vbCrLf & "Server: " & My.Settings.server & vbCrLf & "Datenbank: " & My.Settings.datenbank & vbCrLf & "Rechte: " & rechte)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAktualisieren.Click
+    Private Sub btnAktualisieren_Click(sender As Object, e As EventArgs) Handles btnAktualisieren.Click
         fillDGV()
         dgvUebersicht_SelectionChanged(sender, e)
     End Sub
@@ -595,7 +615,7 @@ Public Class flow
     End Sub
 
     Private Sub BenutzerverwaltungToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerwaltungToolStripMenuItem.Click
-        Verwaltung.Show()
+        Verwaltung.ShowDialog()
     End Sub
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
@@ -614,16 +634,36 @@ Public Class flow
                 dgvUebersicht.Rows(r).Cells(i).Style.ForeColor = My.Settings.evenRowForeColor
             Next
         Next
-        For i = 0 To columnCount - 1
-            dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.BackColor = My.Settings.selectedRowBackColor
-            dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.ForeColor = My.Settings.selectetRowForeColor
-        Next
+        Try
+            For i = 0 To columnCount - 1
+                dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.BackColor = My.Settings.selectedRowBackColor
+                dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(i).Style.ForeColor = My.Settings.selectetRowForeColor
+            Next
+        Catch ex As Exception
+        End Try
+
+        staendeAnzeigen.rtpStaende.Clear()
+
+        If angemeldet Then
+            If dgvUebersicht.Columns("stand").Width > 250 Then
+                dgvUebersicht.Columns("stand").AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                dgvUebersicht.Columns("stand").Width = 250
+            End If
+            Try
+                Dim staende = getAllStaendeFrom(dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells("aid").Value)
+                For i = 0 To staende.Length / 3 - 1
+                    staendeAnzeigen.rtpStaende.Text &= staende(i, 0) & vbCrLf & vbCrLf
+                    staendeAnzeigen.rtpStaende.Text &= staende(i, 1) & vbTab & staende(i, 2) & vbCrLf & "_________________________________________" & vbCrLf & vbCrLf
+                Next
+
+            Catch ex As Exception
+            End Try
+        End If
+
 
     End Sub
 
-    Private Sub btnStaende_Click(sender As Object, e As EventArgs) Handles btnStaende.Click
-        staendeAnzeigen.Show()
-    End Sub
+
     Sub setSettings()
         With My.Settings
             .oddRowBackColor = Color.FromArgb(90, 90, 90)
@@ -636,9 +676,83 @@ Public Class flow
         con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
         cmd.Connection = con
         cmd.CommandType = CommandType.Text
+    End Sub
+
+    Private Sub EinstellungenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EinstellungenToolStripMenuItem.Click
+        Einstellungen.ShowDialog()
+    End Sub
 
 
 
+    Private Sub sidePanelButton_Click(sender As Object, e As EventArgs) Handles btnSchnelleNotizen.Click, btnStaende.Click
+        formPanel.Controls.Clear()
+        formPanel.Size = New Size(506, sidePanel.Size.Height - 10)
+
+        Select Case sender.name
+            Case "btnSchnelleNotizen"
+                schnelleNotizen.TopLevel = False
+                formPanel.Controls.Add(schnelleNotizen)
+                schnelleNotizen.rtpNotizen.Text = db.getNotiz()
+                schnelleNotizen.Size = formPanel.Size
+                schnelleNotizen.Show()
+            Case "btnStaende"
+                If dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells("aid").Value = "" Then Exit Sub
+
+                staendeAnzeigen.TopLevel = False
+                formPanel.Controls.Add(staendeAnzeigen)
+                staendeAnzeigen.Size = formPanel.Size
+                staendeAnzeigen.Show()
+        End Select
+
+        If Not ausgefahren Or sender.tag Then
+            sidePanelTimer.Start()
+        End If
+
+        For Each btn In sidePanel.Controls.OfType(Of Button)
+            btn.Tag = False
+            btn.BackColor = Color.Gainsboro
+            btn.FlatAppearance.BorderSize = 1
+            btn.ForeColor = Color.Black
+        Next
+        sender.BackColor = Color.DimGray
+        sender.FlatAppearance.BorderSize = 0
+        sender.ForeColor = Color.White
+
+        sender.tag = True
+    End Sub
+
+    Private Sub sidePanelTimer_Tick(sender As Object, e As EventArgs) Handles sidePanelTimer.Tick
+        If ausgefahren Then
+            'einfahren
+            sidePanel.Size = New Size(sidePanel.Size.Width - 40, sidePanel.Size.Height)
+            If sidePanel.Size.Width <= 140 Then
+                sidePanelTimer.Stop()
+                ausgefahren = False
+                For Each btn In sidePanel.Controls.OfType(Of Button)
+                    btn.Tag = False
+                    btn.BackColor = Color.Gainsboro
+                    btn.FlatAppearance.BorderSize = 1
+                    btn.ForeColor = Color.Black
+                Next
+            End If
+        Else
+            'ausfahren
+            sidePanel.Size = New Size(sidePanel.Size.Width + 40, sidePanel.Size.Height)
+            If sidePanel.Size.Width >= 640 Then
+                sidePanelTimer.Stop()
+                ausgefahren = True
+            End If
+        End If
+    End Sub
+
+    Private Sub query()
+        Try
+            con.Open()
+            cmd.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
     End Sub
 
 

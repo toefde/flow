@@ -6,9 +6,6 @@
 
 
 
-Filter einrichten
-
-
 
 
 Passwörter verschlüsseln
@@ -20,7 +17,8 @@ wer hat aufgabe erstellt feld in db
 
 
 Einjstellungen colors und so
-
+eigener Color picker
+RGB mit helligkeitsregler
 
 
 

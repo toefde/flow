@@ -33,8 +33,9 @@ Partial Class flow
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.AbmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerwaltungToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BeendenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerwaltungToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tslInfo = New System.Windows.Forms.ToolStripLabel()
@@ -56,7 +57,6 @@ Partial Class flow
         Me.cbBearbeiter = New System.Windows.Forms.ComboBox()
         Me.cbKategorie = New System.Windows.Forms.ComboBox()
         Me.btnAbbrechenBearbeiten = New System.Windows.Forms.Button()
-        Me.btnStaende = New System.Windows.Forms.Button()
         Me.tbBeschreibung = New System.Windows.Forms.TextBox()
         Me.tbTitel = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -80,7 +80,12 @@ Partial Class flow
         Me.Label7 = New System.Windows.Forms.Label()
         Me.tbNeuTicketNr = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnStaende = New System.Windows.Forms.Button()
+        Me.sidePanelTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.sidePanel = New System.Windows.Forms.Panel()
+        Me.formPanel = New System.Windows.Forms.Panel()
+        Me.btnSchnelleNotizen = New System.Windows.Forms.Button()
+        Me.tcPanel = New System.Windows.Forms.Panel()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -90,6 +95,8 @@ Partial Class flow
         Me.filterPanel.SuspendLayout()
         Me.tpBearbeiten.SuspendLayout()
         Me.tpAufgabeErstellen.SuspendLayout()
+        Me.sidePanel.SuspendLayout()
+        Me.tcPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbStatus
@@ -99,7 +106,7 @@ Partial Class flow
         Me.cbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbStatus.ForeColor = System.Drawing.Color.White
-        Me.cbStatus.Location = New System.Drawing.Point(691, 30)
+        Me.cbStatus.Location = New System.Drawing.Point(677, 30)
         Me.cbStatus.Name = "cbStatus"
         Me.cbStatus.Size = New System.Drawing.Size(189, 28)
         Me.cbStatus.TabIndex = 21
@@ -111,7 +118,7 @@ Partial Class flow
         Me.cbNeuStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbNeuStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbNeuStatus.ForeColor = System.Drawing.Color.White
-        Me.cbNeuStatus.Location = New System.Drawing.Point(691, 30)
+        Me.cbNeuStatus.Location = New System.Drawing.Point(677, 30)
         Me.cbNeuStatus.Name = "cbNeuStatus"
         Me.cbNeuStatus.Size = New System.Drawing.Size(189, 28)
         Me.cbNeuStatus.TabIndex = 33
@@ -123,7 +130,7 @@ Partial Class flow
         Me.cbNeuPrio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbNeuPrio.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbNeuPrio.ForeColor = System.Drawing.Color.White
-        Me.cbNeuPrio.Location = New System.Drawing.Point(895, 30)
+        Me.cbNeuPrio.Location = New System.Drawing.Point(881, 30)
         Me.cbNeuPrio.Name = "cbNeuPrio"
         Me.cbNeuPrio.Size = New System.Drawing.Size(288, 28)
         Me.cbNeuPrio.TabIndex = 37
@@ -135,7 +142,7 @@ Partial Class flow
         Me.cbPrio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbPrio.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbPrio.ForeColor = System.Drawing.Color.White
-        Me.cbPrio.Location = New System.Drawing.Point(895, 30)
+        Me.cbPrio.Location = New System.Drawing.Point(881, 30)
         Me.cbPrio.Name = "cbPrio"
         Me.cbPrio.Size = New System.Drawing.Size(288, 28)
         Me.cbPrio.TabIndex = 38
@@ -149,7 +156,7 @@ Partial Class flow
         Me.btnBearbeitet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.btnBearbeitet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBearbeitet.ForeColor = System.Drawing.Color.Black
-        Me.btnBearbeitet.Location = New System.Drawing.Point(1340, 768)
+        Me.btnBearbeitet.Location = New System.Drawing.Point(1200, 768)
         Me.btnBearbeitet.Name = "btnBearbeitet"
         Me.btnBearbeitet.Size = New System.Drawing.Size(130, 50)
         Me.btnBearbeitet.TabIndex = 1
@@ -159,7 +166,7 @@ Partial Class flow
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem, Me.AnmeldenToolStripMenuItem, Me.VerwaltungToolStripMenuItem, Me.BeendenToolStripMenuItem, Me.InfoToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem, Me.AnmeldenToolStripMenuItem, Me.BeendenToolStripMenuItem, Me.VerwaltungToolStripMenuItem, Me.EinstellungenToolStripMenuItem, Me.InfoToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1484, 29)
@@ -181,6 +188,13 @@ Partial Class flow
         Me.AnmeldenToolStripMenuItem.Size = New System.Drawing.Size(93, 25)
         Me.AnmeldenToolStripMenuItem.Text = "Anmelden"
         '
+        'BeendenToolStripMenuItem
+        '
+        Me.BeendenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem"
+        Me.BeendenToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
+        Me.BeendenToolStripMenuItem.Text = "Beenden"
+        '
         'VerwaltungToolStripMenuItem
         '
         Me.VerwaltungToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!)
@@ -188,12 +202,12 @@ Partial Class flow
         Me.VerwaltungToolStripMenuItem.Size = New System.Drawing.Size(188, 25)
         Me.VerwaltungToolStripMenuItem.Text = "Stammdatenverwaltung"
         '
-        'BeendenToolStripMenuItem
+        'EinstellungenToolStripMenuItem
         '
-        Me.BeendenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem"
-        Me.BeendenToolStripMenuItem.Size = New System.Drawing.Size(82, 25)
-        Me.BeendenToolStripMenuItem.Text = "Beenden"
+        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(115, 25)
+        Me.EinstellungenToolStripMenuItem.Text = "Einstellungen"
         '
         'InfoToolStripMenuItem
         '
@@ -226,10 +240,11 @@ Partial Class flow
         Me.TabControl1.Controls.Add(Me.tpAufgabeErstellen)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TabControl1.Location = New System.Drawing.Point(0, 29)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.MinimumSize = New System.Drawing.Size(130, 26)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1484, 857)
+        Me.TabControl1.Size = New System.Drawing.Size(1344, 857)
         Me.TabControl1.TabIndex = 18
         '
         'tpUebersicht
@@ -240,7 +255,7 @@ Partial Class flow
         Me.tpUebersicht.Location = New System.Drawing.Point(4, 29)
         Me.tpUebersicht.Name = "tpUebersicht"
         Me.tpUebersicht.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpUebersicht.Size = New System.Drawing.Size(1476, 824)
+        Me.tpUebersicht.Size = New System.Drawing.Size(1336, 824)
         Me.tpUebersicht.TabIndex = 0
         Me.tpUebersicht.Text = "Übersicht"
         '
@@ -250,14 +265,14 @@ Partial Class flow
         Me.dataPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dataPanel.Location = New System.Drawing.Point(3, 63)
         Me.dataPanel.Name = "dataPanel"
-        Me.dataPanel.Size = New System.Drawing.Size(1470, 758)
+        Me.dataPanel.Size = New System.Drawing.Size(1330, 758)
         Me.dataPanel.TabIndex = 4
         '
         'dgvUebersicht
         '
         Me.dgvUebersicht.AllowUserToAddRows = False
         Me.dgvUebersicht.AllowUserToDeleteRows = False
-        Me.dgvUebersicht.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvUebersicht.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.dgvUebersicht.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.dgvUebersicht.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvUebersicht.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -288,7 +303,8 @@ Partial Class flow
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
         Me.dgvUebersicht.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvUebersicht.RowTemplate.Height = 30
-        Me.dgvUebersicht.Size = New System.Drawing.Size(1470, 758)
+        Me.dgvUebersicht.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvUebersicht.Size = New System.Drawing.Size(1330, 758)
         Me.dgvUebersicht.TabIndex = 0
         '
         'filterPanel
@@ -299,7 +315,7 @@ Partial Class flow
         Me.filterPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.filterPanel.Location = New System.Drawing.Point(3, 3)
         Me.filterPanel.Name = "filterPanel"
-        Me.filterPanel.Size = New System.Drawing.Size(1470, 60)
+        Me.filterPanel.Size = New System.Drawing.Size(1330, 60)
         Me.filterPanel.TabIndex = 3
         '
         'btnAktualisieren
@@ -346,7 +362,6 @@ Partial Class flow
         Me.tpBearbeiten.Controls.Add(Me.cbKategorie)
         Me.tpBearbeiten.Controls.Add(Me.cbPrio)
         Me.tpBearbeiten.Controls.Add(Me.btnAbbrechenBearbeiten)
-        Me.tpBearbeiten.Controls.Add(Me.btnStaende)
         Me.tpBearbeiten.Controls.Add(Me.tbBeschreibung)
         Me.tpBearbeiten.Controls.Add(Me.btnBearbeitet)
         Me.tpBearbeiten.Controls.Add(Me.tbTitel)
@@ -360,7 +375,7 @@ Partial Class flow
         Me.tpBearbeiten.Location = New System.Drawing.Point(4, 29)
         Me.tpBearbeiten.Name = "tpBearbeiten"
         Me.tpBearbeiten.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpBearbeiten.Size = New System.Drawing.Size(1476, 824)
+        Me.tpBearbeiten.Size = New System.Drawing.Size(1336, 824)
         Me.tpBearbeiten.TabIndex = 1
         Me.tpBearbeiten.Text = "Bearbeiten"
         '
@@ -368,7 +383,7 @@ Partial Class flow
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label12.Location = New System.Drawing.Point(900, 65)
+        Me.Label12.Location = New System.Drawing.Point(886, 65)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(77, 20)
         Me.Label12.TabIndex = 47
@@ -378,7 +393,7 @@ Partial Class flow
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label11.Location = New System.Drawing.Point(900, 7)
+        Me.Label11.Location = New System.Drawing.Point(886, 7)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(63, 20)
         Me.Label11.TabIndex = 46
@@ -388,7 +403,7 @@ Partial Class flow
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label10.Location = New System.Drawing.Point(692, 65)
+        Me.Label10.Location = New System.Drawing.Point(678, 65)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(83, 20)
         Me.Label10.TabIndex = 45
@@ -398,7 +413,7 @@ Partial Class flow
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label5.Location = New System.Drawing.Point(692, 7)
+        Me.Label5.Location = New System.Drawing.Point(678, 7)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(56, 20)
         Me.Label5.TabIndex = 44
@@ -408,7 +423,7 @@ Partial Class flow
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label9.Location = New System.Drawing.Point(692, 127)
+        Me.Label9.Location = New System.Drawing.Point(678, 127)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(106, 20)
         Me.Label9.TabIndex = 43
@@ -420,7 +435,8 @@ Partial Class flow
         Me.tbLetzterStand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbLetzterStand.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbLetzterStand.ForeColor = System.Drawing.Color.White
-        Me.tbLetzterStand.Location = New System.Drawing.Point(692, 150)
+        Me.tbLetzterStand.Location = New System.Drawing.Point(678, 150)
+        Me.tbLetzterStand.MinimumSize = New System.Drawing.Size(325, 150)
         Me.tbLetzterStand.Multiline = True
         Me.tbLetzterStand.Name = "tbLetzterStand"
         Me.tbLetzterStand.ReadOnly = True
@@ -429,9 +445,8 @@ Partial Class flow
         '
         'lblID
         '
-        Me.lblID.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblID.AutoSize = True
-        Me.lblID.Location = New System.Drawing.Point(8, 798)
+        Me.lblID.Location = New System.Drawing.Point(7, 752)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(26, 20)
         Me.lblID.TabIndex = 41
@@ -444,7 +459,7 @@ Partial Class flow
         Me.cbBearbeiter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbBearbeiter.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbBearbeiter.ForeColor = System.Drawing.Color.White
-        Me.cbBearbeiter.Location = New System.Drawing.Point(691, 88)
+        Me.cbBearbeiter.Location = New System.Drawing.Point(677, 88)
         Me.cbBearbeiter.Name = "cbBearbeiter"
         Me.cbBearbeiter.Size = New System.Drawing.Size(189, 28)
         Me.cbBearbeiter.TabIndex = 40
@@ -456,7 +471,7 @@ Partial Class flow
         Me.cbKategorie.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbKategorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbKategorie.ForeColor = System.Drawing.Color.White
-        Me.cbKategorie.Location = New System.Drawing.Point(895, 88)
+        Me.cbKategorie.Location = New System.Drawing.Point(881, 88)
         Me.cbKategorie.Name = "cbKategorie"
         Me.cbKategorie.Size = New System.Drawing.Size(288, 28)
         Me.cbKategorie.TabIndex = 39
@@ -470,27 +485,12 @@ Partial Class flow
         Me.btnAbbrechenBearbeiten.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.btnAbbrechenBearbeiten.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAbbrechenBearbeiten.ForeColor = System.Drawing.Color.Black
-        Me.btnAbbrechenBearbeiten.Location = New System.Drawing.Point(1204, 768)
+        Me.btnAbbrechenBearbeiten.Location = New System.Drawing.Point(1064, 768)
         Me.btnAbbrechenBearbeiten.Name = "btnAbbrechenBearbeiten"
         Me.btnAbbrechenBearbeiten.Size = New System.Drawing.Size(130, 50)
         Me.btnAbbrechenBearbeiten.TabIndex = 2
         Me.btnAbbrechenBearbeiten.Text = "Abbrechen"
         Me.btnAbbrechenBearbeiten.UseVisualStyleBackColor = True
-        '
-        'btnStaende
-        '
-        Me.btnStaende.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnStaende.FlatAppearance.BorderColor = System.Drawing.Color.Silver
-        Me.btnStaende.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
-        Me.btnStaende.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.btnStaende.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnStaende.ForeColor = System.Drawing.Color.Black
-        Me.btnStaende.Location = New System.Drawing.Point(8, 689)
-        Me.btnStaende.Name = "btnStaende"
-        Me.btnStaende.Size = New System.Drawing.Size(130, 50)
-        Me.btnStaende.TabIndex = 24
-        Me.btnStaende.Text = "Alle Stände anzeigen"
-        Me.btnStaende.UseVisualStyleBackColor = True
         '
         'tbBeschreibung
         '
@@ -499,6 +499,7 @@ Partial Class flow
         Me.tbBeschreibung.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBeschreibung.ForeColor = System.Drawing.Color.White
         Me.tbBeschreibung.Location = New System.Drawing.Point(7, 150)
+        Me.tbBeschreibung.MinimumSize = New System.Drawing.Size(325, 150)
         Me.tbBeschreibung.Multiline = True
         Me.tbBeschreibung.Name = "tbBeschreibung"
         Me.tbBeschreibung.Size = New System.Drawing.Size(650, 250)
@@ -511,6 +512,7 @@ Partial Class flow
         Me.tbTitel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbTitel.ForeColor = System.Drawing.Color.White
         Me.tbTitel.Location = New System.Drawing.Point(7, 30)
+        Me.tbTitel.MinimumSize = New System.Drawing.Size(326, 26)
         Me.tbTitel.Name = "tbTitel"
         Me.tbTitel.Size = New System.Drawing.Size(652, 26)
         Me.tbTitel.TabIndex = 15
@@ -542,6 +544,7 @@ Partial Class flow
         Me.tbStand.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbStand.ForeColor = System.Drawing.Color.White
         Me.tbStand.Location = New System.Drawing.Point(8, 433)
+        Me.tbStand.MinimumSize = New System.Drawing.Size(325, 150)
         Me.tbStand.Multiline = True
         Me.tbStand.Name = "tbStand"
         Me.tbStand.Size = New System.Drawing.Size(650, 250)
@@ -565,7 +568,7 @@ Partial Class flow
         Me.tbTicketNr.ForeColor = System.Drawing.Color.White
         Me.tbTicketNr.Location = New System.Drawing.Point(7, 94)
         Me.tbTicketNr.Name = "tbTicketNr"
-        Me.tbTicketNr.Size = New System.Drawing.Size(263, 26)
+        Me.tbTicketNr.Size = New System.Drawing.Size(260, 26)
         Me.tbTicketNr.TabIndex = 19
         '
         'Label3
@@ -600,7 +603,7 @@ Partial Class flow
         Me.tpAufgabeErstellen.Location = New System.Drawing.Point(4, 29)
         Me.tpAufgabeErstellen.Name = "tpAufgabeErstellen"
         Me.tpAufgabeErstellen.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAufgabeErstellen.Size = New System.Drawing.Size(1476, 824)
+        Me.tpAufgabeErstellen.Size = New System.Drawing.Size(1336, 824)
         Me.tpAufgabeErstellen.TabIndex = 2
         Me.tpAufgabeErstellen.Text = "Aufgabe erstellen"
         '
@@ -608,7 +611,7 @@ Partial Class flow
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label13.Location = New System.Drawing.Point(900, 65)
+        Me.Label13.Location = New System.Drawing.Point(886, 65)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(77, 20)
         Me.Label13.TabIndex = 51
@@ -618,7 +621,7 @@ Partial Class flow
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label14.Location = New System.Drawing.Point(900, 7)
+        Me.Label14.Location = New System.Drawing.Point(886, 7)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(63, 20)
         Me.Label14.TabIndex = 50
@@ -628,7 +631,7 @@ Partial Class flow
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label15.Location = New System.Drawing.Point(692, 65)
+        Me.Label15.Location = New System.Drawing.Point(678, 65)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(83, 20)
         Me.Label15.TabIndex = 49
@@ -638,7 +641,7 @@ Partial Class flow
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label16.Location = New System.Drawing.Point(692, 7)
+        Me.Label16.Location = New System.Drawing.Point(678, 7)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(56, 20)
         Me.Label16.TabIndex = 48
@@ -653,7 +656,7 @@ Partial Class flow
         Me.btnAbbrechenErstellen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.btnAbbrechenErstellen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAbbrechenErstellen.ForeColor = System.Drawing.Color.Black
-        Me.btnAbbrechenErstellen.Location = New System.Drawing.Point(1204, 768)
+        Me.btnAbbrechenErstellen.Location = New System.Drawing.Point(1064, 768)
         Me.btnAbbrechenErstellen.Name = "btnAbbrechenErstellen"
         Me.btnAbbrechenErstellen.Size = New System.Drawing.Size(130, 50)
         Me.btnAbbrechenErstellen.TabIndex = 42
@@ -667,7 +670,7 @@ Partial Class flow
         Me.cbNeuBearbeiter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbNeuBearbeiter.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbNeuBearbeiter.ForeColor = System.Drawing.Color.White
-        Me.cbNeuBearbeiter.Location = New System.Drawing.Point(691, 88)
+        Me.cbNeuBearbeiter.Location = New System.Drawing.Point(677, 88)
         Me.cbNeuBearbeiter.Name = "cbNeuBearbeiter"
         Me.cbNeuBearbeiter.Size = New System.Drawing.Size(189, 28)
         Me.cbNeuBearbeiter.TabIndex = 41
@@ -679,7 +682,7 @@ Partial Class flow
         Me.cbNeuKategorie.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbNeuKategorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cbNeuKategorie.ForeColor = System.Drawing.Color.White
-        Me.cbNeuKategorie.Location = New System.Drawing.Point(895, 88)
+        Me.cbNeuKategorie.Location = New System.Drawing.Point(881, 88)
         Me.cbNeuKategorie.Name = "cbNeuKategorie"
         Me.cbNeuKategorie.Size = New System.Drawing.Size(288, 28)
         Me.cbNeuKategorie.TabIndex = 40
@@ -693,7 +696,7 @@ Partial Class flow
         Me.btnNeuErstellen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.btnNeuErstellen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNeuErstellen.ForeColor = System.Drawing.Color.Black
-        Me.btnNeuErstellen.Location = New System.Drawing.Point(1340, 768)
+        Me.btnNeuErstellen.Location = New System.Drawing.Point(1200, 768)
         Me.btnNeuErstellen.Name = "btnNeuErstellen"
         Me.btnNeuErstellen.Size = New System.Drawing.Size(130, 50)
         Me.btnNeuErstellen.TabIndex = 36
@@ -707,6 +710,7 @@ Partial Class flow
         Me.tbNeuBeschreibung.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbNeuBeschreibung.ForeColor = System.Drawing.Color.White
         Me.tbNeuBeschreibung.Location = New System.Drawing.Point(7, 150)
+        Me.tbNeuBeschreibung.MinimumSize = New System.Drawing.Size(325, 150)
         Me.tbNeuBeschreibung.Multiline = True
         Me.tbNeuBeschreibung.Name = "tbNeuBeschreibung"
         Me.tbNeuBeschreibung.Size = New System.Drawing.Size(650, 250)
@@ -719,6 +723,7 @@ Partial Class flow
         Me.tbNeuTitel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbNeuTitel.ForeColor = System.Drawing.Color.White
         Me.tbNeuTitel.Location = New System.Drawing.Point(7, 30)
+        Me.tbNeuTitel.MinimumSize = New System.Drawing.Size(326, 26)
         Me.tbNeuTitel.Name = "tbNeuTitel"
         Me.tbNeuTitel.Size = New System.Drawing.Size(652, 26)
         Me.tbNeuTitel.TabIndex = 27
@@ -750,8 +755,9 @@ Partial Class flow
         Me.tbNeuTicketNr.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbNeuTicketNr.ForeColor = System.Drawing.Color.White
         Me.tbNeuTicketNr.Location = New System.Drawing.Point(7, 94)
+        Me.tbNeuTicketNr.MinimumSize = New System.Drawing.Size(130, 26)
         Me.tbNeuTicketNr.Name = "tbNeuTicketNr"
-        Me.tbNeuTicketNr.Size = New System.Drawing.Size(263, 26)
+        Me.tbNeuTicketNr.Size = New System.Drawing.Size(260, 26)
         Me.tbNeuTicketNr.TabIndex = 31
         '
         'Label8
@@ -764,13 +770,81 @@ Partial Class flow
         Me.Label8.TabIndex = 32
         Me.Label8.Text = "Ticket#"
         '
+        'btnStaende
+        '
+        Me.btnStaende.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnStaende.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.btnStaende.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.btnStaende.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.btnStaende.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnStaende.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnStaende.ForeColor = System.Drawing.Color.Black
+        Me.btnStaende.Location = New System.Drawing.Point(5, 60)
+        Me.btnStaende.Name = "btnStaende"
+        Me.btnStaende.Size = New System.Drawing.Size(130, 50)
+        Me.btnStaende.TabIndex = 24
+        Me.btnStaende.Text = "Alle Stände anzeigen"
+        Me.btnStaende.UseVisualStyleBackColor = True
+        '
+        'sidePanelTimer
+        '
+        Me.sidePanelTimer.Interval = 1
+        '
+        'sidePanel
+        '
+        Me.sidePanel.Controls.Add(Me.formPanel)
+        Me.sidePanel.Controls.Add(Me.btnSchnelleNotizen)
+        Me.sidePanel.Controls.Add(Me.btnStaende)
+        Me.sidePanel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.sidePanel.Location = New System.Drawing.Point(1344, 29)
+        Me.sidePanel.Margin = New System.Windows.Forms.Padding(10)
+        Me.sidePanel.Name = "sidePanel"
+        Me.sidePanel.Size = New System.Drawing.Size(140, 857)
+        Me.sidePanel.TabIndex = 19
+        '
+        'formPanel
+        '
+        Me.formPanel.AutoSize = True
+        Me.formPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.formPanel.Location = New System.Drawing.Point(141, 5)
+        Me.formPanel.MinimumSize = New System.Drawing.Size(506, 847)
+        Me.formPanel.Name = "formPanel"
+        Me.formPanel.Size = New System.Drawing.Size(506, 847)
+        Me.formPanel.TabIndex = 44
+        '
+        'btnSchnelleNotizen
+        '
+        Me.btnSchnelleNotizen.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnSchnelleNotizen.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.btnSchnelleNotizen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.btnSchnelleNotizen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.btnSchnelleNotizen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSchnelleNotizen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSchnelleNotizen.ForeColor = System.Drawing.Color.Black
+        Me.btnSchnelleNotizen.Location = New System.Drawing.Point(5, 4)
+        Me.btnSchnelleNotizen.Name = "btnSchnelleNotizen"
+        Me.btnSchnelleNotizen.Size = New System.Drawing.Size(130, 50)
+        Me.btnSchnelleNotizen.TabIndex = 43
+        Me.btnSchnelleNotizen.Text = "Schnelle Notizen"
+        Me.btnSchnelleNotizen.UseVisualStyleBackColor = False
+        '
+        'tcPanel
+        '
+        Me.tcPanel.Controls.Add(Me.TabControl1)
+        Me.tcPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tcPanel.Location = New System.Drawing.Point(0, 29)
+        Me.tcPanel.Name = "tcPanel"
+        Me.tcPanel.Size = New System.Drawing.Size(1344, 857)
+        Me.tcPanel.TabIndex = 20
+        '
         'flow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1484, 911)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.tcPanel)
+        Me.Controls.Add(Me.sidePanel)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.ForeColor = System.Drawing.Color.White
@@ -791,6 +865,9 @@ Partial Class flow
         Me.tpBearbeiten.PerformLayout()
         Me.tpAufgabeErstellen.ResumeLayout(False)
         Me.tpAufgabeErstellen.PerformLayout()
+        Me.sidePanel.ResumeLayout(False)
+        Me.sidePanel.PerformLayout()
+        Me.tcPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -838,7 +915,7 @@ Partial Class flow
     Friend WithEvents Label9 As Label
     Friend WithEvents tbLetzterStand As TextBox
     Friend WithEvents VerwaltungToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Timer1 As Timer
+    Friend WithEvents sidePanelTimer As Timer
     Friend WithEvents btnAbbrechenErstellen As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
@@ -851,4 +928,9 @@ Partial Class flow
     Friend WithEvents dataPanel As Panel
     Friend WithEvents filterPanel As Panel
     Friend WithEvents lblID As Label
+    Friend WithEvents EinstellungenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents sidePanel As Panel
+    Friend WithEvents btnSchnelleNotizen As Button
+    Friend WithEvents tcPanel As Panel
+    Friend WithEvents formPanel As Panel
 End Class

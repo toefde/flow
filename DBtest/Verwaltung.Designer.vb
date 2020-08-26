@@ -24,10 +24,10 @@ Partial Class Verwaltung
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvBenutzerverwaltung = New System.Windows.Forms.DataGridView()
@@ -190,7 +190,7 @@ Partial Class Verwaltung
         Me.tbBVbenutzer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBVbenutzer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBVbenutzer.ForeColor = System.Drawing.Color.White
-        Me.tbBVbenutzer.Location = New System.Drawing.Point(10, 45)
+        Me.tbBVbenutzer.Location = New System.Drawing.Point(10, 201)
         Me.tbBVbenutzer.Name = "tbBVbenutzer"
         Me.tbBVbenutzer.Size = New System.Drawing.Size(384, 26)
         Me.tbBVbenutzer.TabIndex = 7
@@ -199,7 +199,7 @@ Partial Class Verwaltung
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label5.Location = New System.Drawing.Point(6, 74)
+        Me.Label5.Location = New System.Drawing.Point(6, 126)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 20)
         Me.Label5.TabIndex = 10
@@ -211,7 +211,7 @@ Partial Class Verwaltung
         Me.tbBVpasswort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBVpasswort.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBVpasswort.ForeColor = System.Drawing.Color.White
-        Me.tbBVpasswort.Location = New System.Drawing.Point(10, 97)
+        Me.tbBVpasswort.Location = New System.Drawing.Point(10, 149)
         Me.tbBVpasswort.Name = "tbBVpasswort"
         Me.tbBVpasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(63)
         Me.tbBVpasswort.Size = New System.Drawing.Size(384, 26)
@@ -221,7 +221,7 @@ Partial Class Verwaltung
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label6.Location = New System.Drawing.Point(6, 22)
+        Me.Label6.Location = New System.Drawing.Point(6, 178)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(114, 20)
         Me.Label6.TabIndex = 9
@@ -233,7 +233,7 @@ Partial Class Verwaltung
         Me.tbBVvorname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBVvorname.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBVvorname.ForeColor = System.Drawing.Color.White
-        Me.tbBVvorname.Location = New System.Drawing.Point(10, 149)
+        Me.tbBVvorname.Location = New System.Drawing.Point(10, 45)
         Me.tbBVvorname.Name = "tbBVvorname"
         Me.tbBVvorname.Size = New System.Drawing.Size(384, 26)
         Me.tbBVvorname.TabIndex = 1
@@ -242,7 +242,7 @@ Partial Class Verwaltung
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label3.Location = New System.Drawing.Point(6, 178)
+        Me.Label3.Location = New System.Drawing.Point(6, 74)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(86, 20)
         Me.Label3.TabIndex = 6
@@ -254,7 +254,7 @@ Partial Class Verwaltung
         Me.tbBVnachname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBVnachname.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBVnachname.ForeColor = System.Drawing.Color.White
-        Me.tbBVnachname.Location = New System.Drawing.Point(10, 201)
+        Me.tbBVnachname.Location = New System.Drawing.Point(10, 97)
         Me.tbBVnachname.Name = "tbBVnachname"
         Me.tbBVnachname.Size = New System.Drawing.Size(384, 26)
         Me.tbBVnachname.TabIndex = 2
@@ -263,7 +263,7 @@ Partial Class Verwaltung
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label4.Location = New System.Drawing.Point(6, 126)
+        Me.Label4.Location = New System.Drawing.Point(6, 22)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(74, 20)
         Me.Label4.TabIndex = 5
@@ -342,7 +342,7 @@ Partial Class Verwaltung
         Me.tbBAbenutzer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBAbenutzer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBAbenutzer.ForeColor = System.Drawing.Color.White
-        Me.tbBAbenutzer.Location = New System.Drawing.Point(10, 45)
+        Me.tbBAbenutzer.Location = New System.Drawing.Point(10, 201)
         Me.tbBAbenutzer.Name = "tbBAbenutzer"
         Me.tbBAbenutzer.Size = New System.Drawing.Size(384, 26)
         Me.tbBAbenutzer.TabIndex = 7
@@ -351,7 +351,7 @@ Partial Class Verwaltung
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label1.Location = New System.Drawing.Point(6, 74)
+        Me.Label1.Location = New System.Drawing.Point(6, 126)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(74, 20)
         Me.Label1.TabIndex = 10
@@ -363,7 +363,7 @@ Partial Class Verwaltung
         Me.tbBApasswort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBApasswort.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBApasswort.ForeColor = System.Drawing.Color.White
-        Me.tbBApasswort.Location = New System.Drawing.Point(10, 97)
+        Me.tbBApasswort.Location = New System.Drawing.Point(10, 149)
         Me.tbBApasswort.Name = "tbBApasswort"
         Me.tbBApasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(63)
         Me.tbBApasswort.Size = New System.Drawing.Size(384, 26)
@@ -373,7 +373,7 @@ Partial Class Verwaltung
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label2.Location = New System.Drawing.Point(6, 22)
+        Me.Label2.Location = New System.Drawing.Point(6, 178)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(114, 20)
         Me.Label2.TabIndex = 9
@@ -385,7 +385,7 @@ Partial Class Verwaltung
         Me.tbBAvorname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBAvorname.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBAvorname.ForeColor = System.Drawing.Color.White
-        Me.tbBAvorname.Location = New System.Drawing.Point(10, 149)
+        Me.tbBAvorname.Location = New System.Drawing.Point(10, 45)
         Me.tbBAvorname.Name = "tbBAvorname"
         Me.tbBAvorname.Size = New System.Drawing.Size(384, 26)
         Me.tbBAvorname.TabIndex = 1
@@ -394,7 +394,7 @@ Partial Class Verwaltung
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label7.Location = New System.Drawing.Point(6, 178)
+        Me.Label7.Location = New System.Drawing.Point(6, 74)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(86, 20)
         Me.Label7.TabIndex = 6
@@ -406,7 +406,7 @@ Partial Class Verwaltung
         Me.tbBAnachname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tbBAnachname.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.tbBAnachname.ForeColor = System.Drawing.Color.White
-        Me.tbBAnachname.Location = New System.Drawing.Point(10, 201)
+        Me.tbBAnachname.Location = New System.Drawing.Point(10, 97)
         Me.tbBAnachname.Name = "tbBAnachname"
         Me.tbBAnachname.Size = New System.Drawing.Size(384, 26)
         Me.tbBAnachname.TabIndex = 2
@@ -415,7 +415,7 @@ Partial Class Verwaltung
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label8.Location = New System.Drawing.Point(6, 126)
+        Me.Label8.Location = New System.Drawing.Point(6, 22)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(74, 20)
         Me.Label8.TabIndex = 5
@@ -666,25 +666,25 @@ Partial Class Verwaltung
         Me.dgvStatusverwaltung.AllowUserToResizeRows = False
         Me.dgvStatusverwaltung.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.dgvStatusverwaltung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(5, 2, 5, 2)
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvStatusverwaltung.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(5, 2, 5, 2)
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvStatusverwaltung.DefaultCellStyle = DataGridViewCellStyle11
         Me.dgvStatusverwaltung.GridColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.dgvStatusverwaltung.Location = New System.Drawing.Point(6, 6)
         Me.dgvStatusverwaltung.MultiSelect = False
         Me.dgvStatusverwaltung.Name = "dgvStatusverwaltung"
         Me.dgvStatusverwaltung.ReadOnly = True
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
-        Me.dgvStatusverwaltung.RowsDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black
+        Me.dgvStatusverwaltung.RowsDefaultCellStyle = DataGridViewCellStyle12
         Me.dgvStatusverwaltung.RowTemplate.Height = 30
         Me.dgvStatusverwaltung.Size = New System.Drawing.Size(962, 309)
         Me.dgvStatusverwaltung.TabIndex = 1
@@ -859,25 +859,25 @@ Partial Class Verwaltung
         Me.dgvKategorienverwaltung.AllowUserToResizeRows = False
         Me.dgvKategorienverwaltung.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.dgvKategorienverwaltung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(5, 2, 5, 2)
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvKategorienverwaltung.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(5, 2, 5, 2)
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvKategorienverwaltung.DefaultCellStyle = DataGridViewCellStyle13
         Me.dgvKategorienverwaltung.GridColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.dgvKategorienverwaltung.Location = New System.Drawing.Point(6, 6)
         Me.dgvKategorienverwaltung.MultiSelect = False
         Me.dgvKategorienverwaltung.Name = "dgvKategorienverwaltung"
         Me.dgvKategorienverwaltung.ReadOnly = True
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black
-        Me.dgvKategorienverwaltung.RowsDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(145, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
+        Me.dgvKategorienverwaltung.RowsDefaultCellStyle = DataGridViewCellStyle14
         Me.dgvKategorienverwaltung.RowTemplate.Height = 30
         Me.dgvKategorienverwaltung.Size = New System.Drawing.Size(962, 309)
         Me.dgvKategorienverwaltung.TabIndex = 2

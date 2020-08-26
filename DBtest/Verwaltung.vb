@@ -5,7 +5,6 @@ Public Class Verwaltung
     Dim cmd As New MySqlCommand
     Dim reader As MySqlDataReader
     Dim dgvs As New List(Of DataGridView)
-    Dim dvs As New List(Of DataTable)
 
 
 
@@ -17,7 +16,6 @@ Public Class Verwaltung
         For Each tp As TabPage In TabControl1.Controls.OfType(Of TabPage)
             For Each dgv As DataGridView In tp.Controls.OfType(Of DataGridView)
                 dgvs.Add(dgv)
-                dvs.Add(New DataTable)
             Next
         Next
     End Sub
@@ -29,10 +27,10 @@ Public Class Verwaltung
 
 
     Private Sub tbBAvorname_TextChanged(sender As Object, e As EventArgs) Handles tbBAvorname.TextChanged
-        tbBAbenutzer.Text = tbBAvorname.Text & "." & tbBAnachname.Text.ToLower
+        tbBAbenutzer.Text = tbBAvorname.Text.ToLower & "." & tbBAnachname.Text.ToLower
     End Sub
     Private Sub tbBAnachname_TextChanged(sender As Object, e As EventArgs) Handles tbBAnachname.TextChanged
-        tbBAbenutzer.Text = tbBAvorname.Text & "." & tbBAnachname.Text.ToLower
+        tbBAbenutzer.Text = tbBAvorname.Text.ToLower & "." & tbBAnachname.Text.ToLower
     End Sub
 
 
@@ -153,10 +151,6 @@ Public Class Verwaltung
     End Sub
 
     Private Sub btnAnlegen_Click(sender As Object, e As EventArgs) Handles btnBanlegen.Click, btnSanlegen.Click, btnKanlegen.Click, btnPanlegen.Click
-        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & flow.benutzer & ";pwd=" & flow.passwort & ";database=" & My.Settings.datenbank
-        cmd.Connection = con
-        cmd.CommandType = CommandType.Text
-
         Select Case TabControl1.SelectedIndex
             Case 0
                 cmd.CommandText = "CREATE USER '" & tbBAbenutzer.Text & "'@'%' IDENTIFIED BY '" & tbBApasswort.Text & "';
@@ -179,23 +173,13 @@ Public Class Verwaltung
                 cmd.CommandText = "INSERT INTO prio (prioritaet) VALUES ('" & tbPAprioritaet.Text & "');"
                 tbPAprioritaet.Clear()
         End Select
-        Try
-            con.Open()
-            cmd.ExecuteNonQuery()
-            con.Close()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
+        query()
         TabControl1_SelectedIndexChanged(sender, e)
         SelectionChanged(sender, e)
         dgvs(TabControl1.SelectedIndex).Focus()
     End Sub
 
     Private Sub btnVeraendern_Click(sender As Object, e As EventArgs) Handles btnBveraendern.Click, btnSveraendern.Click, btnKveraendern.Click, btnPveraendern.Click
-        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & flow.benutzer & ";pwd=" & flow.passwort & ";database=" & My.Settings.datenbank
-        cmd.Connection = con
-        cmd.CommandType = CommandType.Text
-
         Select Case TabControl1.SelectedIndex
             Case 0
                 If tbBVpasswort.Text = "" Then
@@ -230,23 +214,13 @@ Public Class Verwaltung
                     tbPVprioritaet.Clear()
                 End If
         End Select
-        Try
-            con.Open()
-            cmd.ExecuteNonQuery()
-            con.Close()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
+        query()
         TabControl1_SelectedIndexChanged(sender, e)
         SelectionChanged(sender, e)
         dgvs(TabControl1.SelectedIndex).Focus()
     End Sub
 
     Private Sub btnLoeschen_Click(sender As Object, e As EventArgs) Handles btnBloeschen.Click, btnSloeschen.Click, btnKloeschen.Click, btnPloeschen.Click
-        con.ConnectionString = "server=" & My.Settings.server & ";uid=" & flow.benutzer & ";pwd=" & flow.passwort & ";database=" & My.Settings.datenbank
-        cmd.Connection = con
-        cmd.CommandType = CommandType.Text
-
         Select Case TabControl1.SelectedIndex
             Case 0
                 cmd.CommandText = "DELETE FROM benutzer WHERE bid = " & dgvBenutzerverwaltung.Rows(dgvBenutzerverwaltung.CurrentCellAddress.Y).Cells(0).Value & ";
@@ -254,17 +228,11 @@ Public Class Verwaltung
             Case 1
                 cmd.CommandText = "DELETE FROM status WHERE sid = " & dgvStatusverwaltung.Rows(dgvStatusverwaltung.CurrentCellAddress.Y).Cells(0).Value & ";"
             Case 2
-                cmd.CommandText = "DELETE FROM kategorie WHERE kid = " & dgvKategorienverwaltung.Rows(dgvKategorienverwaltung.CurrentCellAddress.Y).Cells(0).Value & ";"
+                cmd.CommandText = "DELETE FROM kategorien WHERE kid = " & dgvKategorienverwaltung.Rows(dgvKategorienverwaltung.CurrentCellAddress.Y).Cells(0).Value & ";"
             Case 3
                 cmd.CommandText = "DELETE FROM prio WHERE pid = " & dgvPrioritaetenverwaltung.Rows(dgvPrioritaetenverwaltung.CurrentCellAddress.Y).Cells(0).Value & ";"
         End Select
-        Try
-            con.Open()
-            cmd.ExecuteNonQuery()
-            con.Close()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
+        query()
         TabControl1_SelectedIndexChanged(sender, e)
         SelectionChanged(sender, e)
 
@@ -327,5 +295,18 @@ Public Class Verwaltung
         If e.KeyData = Keys.Enter Then
             btnAnlegen_Click(sender, New EventArgs)
         End If
+    End Sub
+
+    Private Sub Verwaltung_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        flow.fillDGV()
+    End Sub
+    Private Sub query()
+        Try
+            con.Open()
+            cmd.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
     End Sub
 End Class

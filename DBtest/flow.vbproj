@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CFABC691-1802-4BC9-B357-81878203CB53}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>DBtest.My.MyApplication</StartupObject>
-    <RootNamespace>DBtest</RootNamespace>
-    <AssemblyName>DBtest</AssemblyName>
+    <StartupObject>Flow.My.MyApplication</StartupObject>
+    <RootNamespace>Flow</RootNamespace>
+    <AssemblyName>Flow</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DBtest.xml</DocumentationFile>
+    <DocumentationFile>Flow.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DBtest.xml</DocumentationFile>
+    <DocumentationFile>Flow.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -83,10 +83,22 @@
     <Compile Include="Anmeldung.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Einstellungen.Designer.vb">
+      <DependentUpon>Einstellungen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Einstellungen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Filter.Designer.vb">
       <DependentUpon>Filter.vb</DependentUpon>
     </Compile>
     <Compile Include="Filter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="schnelleNotizen.Designer.vb">
+      <DependentUpon>schnelleNotizen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="schnelleNotizen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Verwaltung.Designer.vb">
@@ -130,8 +142,14 @@
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Einstellungen.resx">
+      <DependentUpon>Einstellungen.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Filter.resx">
       <DependentUpon>Filter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="schnelleNotizen.resx">
+      <DependentUpon>schnelleNotizen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Verwaltung.resx">
       <DependentUpon>Verwaltung.vb</DependentUpon>

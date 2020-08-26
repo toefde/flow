@@ -230,5 +230,33 @@ Public Class dbAccess
         Return result
     End Function
 
+    Public Sub setNotiz(text As String)
+        cmd.CommandText = "UPDATE benutzer SET notizen = '" & text & "' WHERE bid = " & getBenutzerID(flow.benutzer) & ";"
+        query()
+    End Sub
 
+    Public Function getNotiz()
+        cmd.CommandText = "SELECT notizen FROM benutzer WHERE bid = '" & getBenutzerID(flow.benutzer) & "';"
+        Dim result = ""
+        Try
+            con.Open()
+            reader = cmd.ExecuteReader()
+            reader.Read()
+            result = reader("notizen")
+            con.Close()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+        Return result
+    End Function
+
+    Private Sub query()
+        Try
+            con.Open()
+            cmd.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
 End Class

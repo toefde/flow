@@ -67,6 +67,11 @@ Public Class Anmeldung
                         flow.myVorname = datenArr(2)
                         flow.myNachname = datenArr(3)
                         flow.myFullname = flow.myVorname & " " & flow.myNachname
+                        For Each tabp As TabPage In flow.TabControl1.Controls.OfType(Of TabPage)
+                            For Each item As Button In tabp.Controls.OfType(Of Button)
+                                item.Enabled = True
+                            Next
+                        Next
                     End If
 
                 Loop

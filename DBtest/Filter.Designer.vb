@@ -33,7 +33,7 @@ Partial Class Filter
         Me.Label1 = New System.Windows.Forms.Label()
         Me.clbStatus = New System.Windows.Forms.CheckedListBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.spaltenausblenden = New System.Windows.Forms.CheckedListBox()
+        Me.clbSpalten = New System.Windows.Forms.CheckedListBox()
         Me.btnSpeichern = New System.Windows.Forms.Button()
         Me.filterPanel.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -46,7 +46,7 @@ Partial Class Filter
         Me.clbBenutzer.CheckOnClick = True
         Me.clbBenutzer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.clbBenutzer.ForeColor = System.Drawing.Color.White
-        Me.clbBenutzer.Location = New System.Drawing.Point(8, 27)
+        Me.clbBenutzer.Location = New System.Drawing.Point(12, 177)
         Me.clbBenutzer.Name = "clbBenutzer"
         Me.clbBenutzer.Size = New System.Drawing.Size(300, 105)
         Me.clbBenutzer.TabIndex = 2
@@ -56,7 +56,7 @@ Partial Class Filter
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label6.Location = New System.Drawing.Point(4, 4)
+        Me.Label6.Location = New System.Drawing.Point(8, 154)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(74, 20)
         Me.Label6.TabIndex = 30
@@ -100,7 +100,7 @@ Partial Class Filter
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label3.Location = New System.Drawing.Point(4, 154)
+        Me.Label3.Location = New System.Drawing.Point(4, 4)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(77, 20)
         Me.Label3.TabIndex = 36
@@ -113,7 +113,7 @@ Partial Class Filter
         Me.clbKategorie.CheckOnClick = True
         Me.clbKategorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.clbKategorie.ForeColor = System.Drawing.Color.White
-        Me.clbKategorie.Location = New System.Drawing.Point(8, 177)
+        Me.clbKategorie.Location = New System.Drawing.Point(8, 27)
         Me.clbKategorie.Name = "clbKategorie"
         Me.clbKategorie.Size = New System.Drawing.Size(300, 105)
         Me.clbKategorie.TabIndex = 35
@@ -167,24 +167,25 @@ Partial Class Filter
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.spaltenausblenden)
+        Me.Panel2.Controls.Add(Me.clbSpalten)
         Me.Panel2.Location = New System.Drawing.Point(12, 339)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(543, 259)
         Me.Panel2.TabIndex = 45
         '
-        'spaltenausblenden
+        'clbSpalten
         '
-        Me.spaltenausblenden.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
-        Me.spaltenausblenden.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.spaltenausblenden.CheckOnClick = True
-        Me.spaltenausblenden.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.spaltenausblenden.ForeColor = System.Drawing.Color.White
-        Me.spaltenausblenden.Location = New System.Drawing.Point(3, 3)
-        Me.spaltenausblenden.Name = "spaltenausblenden"
-        Me.spaltenausblenden.Size = New System.Drawing.Size(300, 105)
-        Me.spaltenausblenden.TabIndex = 31
-        Me.spaltenausblenden.ThreeDCheckBoxes = True
+        Me.clbSpalten.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.clbSpalten.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.clbSpalten.CheckOnClick = True
+        Me.clbSpalten.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.clbSpalten.ForeColor = System.Drawing.Color.White
+        Me.clbSpalten.Location = New System.Drawing.Point(3, 3)
+        Me.clbSpalten.Name = "clbSpalten"
+        Me.clbSpalten.Size = New System.Drawing.Size(300, 105)
+        Me.clbSpalten.TabIndex = 31
+        Me.clbSpalten.ThreeDCheckBoxes = True
+        Me.clbSpalten.Visible = False
         '
         'btnSpeichern
         '
@@ -230,7 +231,7 @@ Partial Class Filter
     Friend WithEvents btnSchliessen As Button
     Friend WithEvents filterPanel As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents spaltenausblenden As CheckedListBox
+    Friend WithEvents clbSpalten As CheckedListBox
     Friend WithEvents btnSpeichern As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents clbKategorie As CheckedListBox
