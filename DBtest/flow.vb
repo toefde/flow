@@ -442,8 +442,8 @@ Public Class flow
     End Sub
 
     Private Sub tpUebersicht_Enter(sender As Object, e As EventArgs) Handles tpUebersicht.Enter
-        AcceptButton = Nothing
-        CancelButton = Nothing
+        'AcceptButton = Nothing
+        'CancelButton = Nothing
         fillDGV()
         If angemeldet Then
             Try
@@ -525,8 +525,8 @@ Public Class flow
     End Sub
     Private Sub tpBearbeiten_Enter(sender As Object, e As EventArgs) Handles tpBearbeiten.Enter
         If dgvUebersicht.Rows(dgvUebersicht.CurrentCellAddress.Y).Cells(0).Value <> Nothing Then
-            AcceptButton = btnAbbrechenBearbeiten
-            CancelButton = btnBearbeitet
+            'AcceptButton = btnAbbrechenBearbeiten
+            'CancelButton = btnBearbeitet
             clearAllFieldsBearbeiten()
 
             If angemeldet Then
@@ -563,8 +563,8 @@ Public Class flow
     End Sub
 
     Private Sub tpAufgabeErstellen_Enter(sender As Object, e As EventArgs) Handles tpAufgabeErstellen.Enter
-        AcceptButton = btnBearbeitet
-        CancelButton = btnAbbrechenBearbeiten
+        'AcceptButton = btnBearbeitet
+        'CancelButton = btnAbbrechenBearbeiten
         clearAllFieldsErstellen()
         lastSelected.X = dgvUebersicht.CurrentCellAddress.X
         lastSelected.Y = dgvUebersicht.CurrentCellAddress.Y

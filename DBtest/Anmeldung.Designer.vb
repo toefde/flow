@@ -157,6 +157,7 @@ Partial Class Anmeldung
         Me.Button1.TabIndex = 9
         Me.Button1.Text = "ADMIN"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'Timer1
         '

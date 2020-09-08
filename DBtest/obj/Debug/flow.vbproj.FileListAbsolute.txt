@@ -25,7 +25,6 @@ D:\source\repos\flow\DBtest\bin\Debug\BouncyCastle.Crypto.dll
 D:\source\repos\flow\DBtest\bin\Debug\Ubiety.Dns.Core.dll
 D:\source\repos\flow\DBtest\bin\Debug\Renci.SshNet.dll
 D:\source\repos\flow\DBtest\bin\Debug\MySql.Data.xml
-D:\source\repos\flow\DBtest\obj\Debug\flow.vbprojAssemblyReference.cache
 D:\source\repos\flow\DBtest\obj\Debug\flow.vbproj.GenerateResource.cache
 D:\source\repos\flow\DBtest\obj\Debug\flow.vbproj.CoreCompileInputs.cache
 D:\source\repos\flow\DBtest\obj\Debug\flow.vbproj.CopyComplete
