@@ -62,9 +62,7 @@
         Next
     End Sub
 
-    Private Sub btnSchliessen_Click(sender As Object, e As EventArgs) Handles btnSchliessen.Click
-        Me.Close()
-    End Sub
+
     Private Sub btnSpeichern_Click(sender As Object, e As EventArgs) Handles btnSpeichern.Click
         For kvi = 0 To bFilter.Count
             For i = 0 To clbBenutzer.Items.Count - 1

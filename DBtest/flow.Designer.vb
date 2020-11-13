@@ -44,6 +44,8 @@ Partial Class flow
         Me.dataPanel = New System.Windows.Forms.Panel()
         Me.dgvUebersicht = New System.Windows.Forms.DataGridView()
         Me.filterPanel = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnAktualisieren = New System.Windows.Forms.Button()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.tpBearbeiten = New System.Windows.Forms.TabPage()
@@ -83,6 +85,7 @@ Partial Class flow
         Me.btnStaende = New System.Windows.Forms.Button()
         Me.sidePanelTimer = New System.Windows.Forms.Timer(Me.components)
         Me.sidePanel = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.formPanel = New System.Windows.Forms.Panel()
         Me.btnSchnelleNotizen = New System.Windows.Forms.Button()
         Me.tcPanel = New System.Windows.Forms.Panel()
@@ -96,6 +99,7 @@ Partial Class flow
         Me.tpBearbeiten.SuspendLayout()
         Me.tpAufgabeErstellen.SuspendLayout()
         Me.sidePanel.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tcPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -310,6 +314,8 @@ Partial Class flow
         'filterPanel
         '
         Me.filterPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer), CType(CType(111, Byte), Integer))
+        Me.filterPanel.Controls.Add(Me.Button2)
+        Me.filterPanel.Controls.Add(Me.Button1)
         Me.filterPanel.Controls.Add(Me.btnAktualisieren)
         Me.filterPanel.Controls.Add(Me.btnFilter)
         Me.filterPanel.Dock = System.Windows.Forms.DockStyle.Top
@@ -317,6 +323,36 @@ Partial Class flow
         Me.filterPanel.Name = "filterPanel"
         Me.filterPanel.Size = New System.Drawing.Size(1330, 60)
         Me.filterPanel.TabIndex = 3
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.Color.Black
+        Me.Button2.Location = New System.Drawing.Point(747, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(130, 50)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "rot"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Location = New System.Drawing.Point(600, 5)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(130, 50)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "grün"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnAktualisieren
         '
@@ -792,6 +828,7 @@ Partial Class flow
         '
         'sidePanel
         '
+        Me.sidePanel.Controls.Add(Me.PictureBox1)
         Me.sidePanel.Controls.Add(Me.formPanel)
         Me.sidePanel.Controls.Add(Me.btnSchnelleNotizen)
         Me.sidePanel.Controls.Add(Me.btnStaende)
@@ -801,6 +838,16 @@ Partial Class flow
         Me.sidePanel.Name = "sidePanel"
         Me.sidePanel.Size = New System.Drawing.Size(140, 857)
         Me.sidePanel.TabIndex = 19
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.InitialImage = Nothing
+        Me.PictureBox1.Location = New System.Drawing.Point(5, 822)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(52, 30)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 45
+        Me.PictureBox1.TabStop = False
         '
         'formPanel
         '
@@ -821,7 +868,7 @@ Partial Class flow
         Me.btnSchnelleNotizen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSchnelleNotizen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSchnelleNotizen.ForeColor = System.Drawing.Color.Black
-        Me.btnSchnelleNotizen.Location = New System.Drawing.Point(5, 4)
+        Me.btnSchnelleNotizen.Location = New System.Drawing.Point(9, 4)
         Me.btnSchnelleNotizen.Name = "btnSchnelleNotizen"
         Me.btnSchnelleNotizen.Size = New System.Drawing.Size(130, 50)
         Me.btnSchnelleNotizen.TabIndex = 43
@@ -867,6 +914,7 @@ Partial Class flow
         Me.tpAufgabeErstellen.PerformLayout()
         Me.sidePanel.ResumeLayout(False)
         Me.sidePanel.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tcPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -933,4 +981,7 @@ Partial Class flow
     Friend WithEvents btnSchnelleNotizen As Button
     Friend WithEvents tcPanel As Panel
     Friend WithEvents formPanel As Panel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

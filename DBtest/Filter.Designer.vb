@@ -24,7 +24,6 @@ Partial Class Filter
     Private Sub InitializeComponent()
         Me.clbBenutzer = New System.Windows.Forms.CheckedListBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnSchliessen = New System.Windows.Forms.Button()
         Me.filterPanel = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.clbKategorie = New System.Windows.Forms.CheckedListBox()
@@ -61,24 +60,6 @@ Partial Class Filter
         Me.Label6.Size = New System.Drawing.Size(74, 20)
         Me.Label6.TabIndex = 30
         Me.Label6.Text = "Benutzer"
-        '
-        'btnSchliessen
-        '
-        Me.btnSchliessen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSchliessen.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnSchliessen.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnSchliessen.FlatAppearance.BorderColor = System.Drawing.Color.Silver
-        Me.btnSchliessen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
-        Me.btnSchliessen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.btnSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSchliessen.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.btnSchliessen.ForeColor = System.Drawing.Color.Black
-        Me.btnSchliessen.Location = New System.Drawing.Point(706, 599)
-        Me.btnSchliessen.Name = "btnSchliessen"
-        Me.btnSchliessen.Size = New System.Drawing.Size(130, 50)
-        Me.btnSchliessen.TabIndex = 43
-        Me.btnSchliessen.Text = "Schließen"
-        Me.btnSchliessen.UseVisualStyleBackColor = True
         '
         'filterPanel
         '
@@ -210,12 +191,10 @@ Partial Class Filter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.CancelButton = Me.btnSchliessen
         Me.ClientSize = New System.Drawing.Size(984, 661)
         Me.Controls.Add(Me.btnSpeichern)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.filterPanel)
-        Me.Controls.Add(Me.btnSchliessen)
         Me.ForeColor = System.Drawing.Color.White
         Me.Name = "Filter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -228,7 +207,6 @@ Partial Class Filter
     End Sub
     Friend WithEvents clbBenutzer As CheckedListBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents btnSchliessen As Button
     Friend WithEvents filterPanel As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents clbSpalten As CheckedListBox

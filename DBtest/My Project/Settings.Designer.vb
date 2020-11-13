@@ -143,6 +143,66 @@ Namespace My
                 Me("selectetRowForeColor") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property startFullscreen() As Boolean
+            Get
+                Return CType(Me("startFullscreen"),Boolean)
+            End Get
+            Set
+                Me("startFullscreen") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property startKategorien() As String
+            Get
+                Return CType(Me("startKategorien"),String)
+            End Get
+            Set
+                Me("startKategorien") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property startPrios() As String
+            Get
+                Return CType(Me("startPrios"),String)
+            End Get
+            Set
+                Me("startPrios") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property startStatus() As String
+            Get
+                Return CType(Me("startStatus"),String)
+            End Get
+            Set
+                Me("startStatus") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property fd() As String
+            Get
+                Return CType(Me("fd"),String)
+            End Get
+            Set
+                Me("fd") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

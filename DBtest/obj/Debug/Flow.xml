@@ -22,27 +22,12 @@ Flow
   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
 </summary>
 </member>
-<member name="P:Flow.My.Resources.Resources.giphy">
+<member name="P:Flow.My.Resources.Resources.greenCheck">
 <summary>
   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:Flow.My.Resources.Resources.index">
-<summary>
-  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:Flow.My.Resources.Resources.istockphoto_1132722559_170667a">
-<summary>
-  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:Flow.My.Resources.Resources.kisspng_check_mark_computer_icons_clip_art_green_tick_5ac32cb7a218e4_237956301522740407664">
-<summary>
-  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:Flow.My.Resources.Resources.Konfest_PNG_JPG_Image_Pic_Photo_Free_Download_Royalty_Unlimited_clip_art_sticker_Check_Mark_Symbol_Right_Tick_Yes_Green_13">
+<member name="P:Flow.My.Resources.Resources.redX">
 <summary>
   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
 </summary>

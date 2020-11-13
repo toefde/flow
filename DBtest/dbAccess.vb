@@ -4,6 +4,7 @@ Public Class dbAccess
     Dim con As New MySqlConnection
     Dim cmd As New MySqlCommand
     Dim reader As MySqlDataReader
+    Dim WithEvents ti As New Timer
 
 
     Public Sub New(user As String, pw As String)
@@ -255,8 +256,25 @@ Public Class dbAccess
             con.Open()
             cmd.ExecuteNonQuery()
             con.Close()
+            ti.Interval = 100
+            flow.PictureBox1.Image = My.Resources.greenCheck
+            ti.Tag = 0
+            ti.Start()
         Catch ex As Exception
+            ti.Interval = 100
+            flow.PictureBox1.Image = My.Resources.redX
+            ti.Tag = 0
+            ti.Start()
             MsgBox(ex.ToString)
         End Try
     End Sub
+    Private Sub ti_Tick() Handles ti.Tick
+        ti.Tag += 1
+        If ti.Tag > 20 Then
+            ti.Tag = 0
+            flow.PictureBox1.Image = Nothing
+            ti.Stop()
+        End If
+    End Sub
+
 End Class

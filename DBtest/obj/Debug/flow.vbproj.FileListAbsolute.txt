@@ -43,3 +43,4 @@ D:\source\repos\flow\DBtest\bin\Debug\Flow.xml
 D:\source\repos\flow\DBtest\obj\Debug\Flow.exe
 D:\source\repos\flow\DBtest\obj\Debug\Flow.xml
 D:\source\repos\flow\DBtest\obj\Debug\Flow.pdb
+D:\source\repos\flow\DBtest\obj\Debug\flow.vbprojAssemblyReference.cache

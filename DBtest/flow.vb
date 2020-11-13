@@ -14,7 +14,7 @@ Public Class flow
     Dim prios()
     Dim status()
     Dim benutzerArray(,)
-    Dim VorNachNamen()
+    Dim VorNachNamen() As String
     Dim kategorien()
     Public data As New List(Of String())
     Public filteredData As New List(Of String())
@@ -22,7 +22,9 @@ Public Class flow
     Public angemeldet As Boolean = False
     Public db
     Dim ausgefahren = False
-
+    Dim WithEvents ti As New Timer
+    Dim failure = False
+    Public aktKategorien(), aktStatus(), aktPrios()
 
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Anmeldung.ShowDialog()
@@ -50,6 +52,10 @@ Public Class flow
         kategorien = getKategorien()
         VorNachNamen = getBenutzer()
 
+        aktKategorien = My.Settings.startKategorien.Split(Einstellungen.splitter)
+        aktStatus = My.Settings.startStatus.Split(Einstellungen.splitter)
+        aktPrios = My.Settings.startPrios.Split(Einstellungen.splitter)
+
         Try
             cbStatus.Items.AddRange(status)
             cbNeuStatus.Items.AddRange(status)
@@ -73,19 +79,21 @@ Public Class flow
                 Filter.bFilter.Clear()
                 Filter.kFilter.Clear()
                 For Each item In status
-                    Filter.sFilter.Add(item, True)
+                    Filter.sFilter.Add(item, aktStatus.Contains(item))
                 Next
                 For Each item In prios
-                    Filter.pFilter.Add(item, True)
+                    Filter.pFilter.Add(item, aktPrios.Contains(item))
                 Next
 
+                Filter.bFilter.Item(myFullname) = True
                 For Each item In VorNachNamen
-                    Filter.bFilter.Add(item, False)
-                    Filter.bFilter.Item(myFullname) = True
+                    If item <> myFullname Then
+                        Filter.bFilter.Add(item, False)
+                    End If
                 Next
 
                 For Each item In kategorien
-                    Filter.kFilter.Add(item, True)
+                    Filter.kFilter.Add(item, aktKategorien.Contains(item))
                 Next
 
                 For Each tabp As TabPage In TabControl1.Controls.OfType(Of TabPage)
@@ -95,6 +103,7 @@ Public Class flow
                 Next
             End If
         Catch ex As Exception
+            MsgBox(ex.ToString)
         End Try
         tpUebersicht_Enter(New Object, New EventArgs)
 
@@ -187,6 +196,7 @@ Public Class flow
             Next
         Next
         For Each item In toRemoveRows
+            MsgBox(item)
             filteredData.Remove(item)
         Next
     End Sub
@@ -246,7 +256,7 @@ Public Class flow
 
         dgvUebersicht_SelectionChanged(New Object, New EventArgs)
     End Sub
-    Function getBenutzer()
+    Function getBenutzer() As String()
         Dim arrayLaenge As Integer
         con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
 
@@ -267,7 +277,7 @@ Public Class flow
 
         'benutzername 0, vorname 1, nachname 2
         Dim nutzer(arrayLaenge - 1, 2)
-        Dim bnutzer(arrayLaenge - 1)
+        Dim bnutzer(arrayLaenge - 1) As String
 
         cmd.CommandText = "SELECT benutzername, vorname, nachname FROM benutzer ORDER BY benutzername ASC;"
         cmd.CommandType = CommandType.Text
@@ -475,10 +485,12 @@ Public Class flow
                 cmd.CommandText = "INSERT INTO aufgaben (titel, beschreibung, bearbeiter, ticketnr, status, prio, kategorie, bearbeitet) VALUES ('" & tbNeuTitel.Text & "', '" & tbNeuBeschreibung.Text &
                     "', (SELECT bid FROM benutzer WHERE benutzername = '" & bname & "'), '" & tbNeuTicketNr.Text & "', '" & db.getStatusID(cbNeuStatus.SelectedItem.ToString) & "', '" & db.getPrioID(cbNeuPrio.SelectedItem.ToString) &
                     "', '" & db.getKategorieID(cbNeuKategorie.SelectedItem.ToString) & "', NOW());"
-                con.Open()
-                cmd.ExecuteNonQuery()
-                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('Aufgabe erstellt', '" & db.getAufgabeID(tbNeuTitel.Text) & "', '" & db.getBenutzerID(benutzer) & "');"
-                cmd.ExecuteNonQuery()
+                query()
+                'con.Open()
+                'cmd.ExecuteNonQuery()
+                cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('" & tbNeuBeschreibung.Text & "', '" & db.getAufgabeID(tbNeuTitel.Text) & "', '" & db.getBenutzerID(benutzer) & "');"
+                query()
+                'cmd.ExecuteNonQuery()
             Catch ex As Exception
                 If angemeldet Then
                     MsgBox(ex.ToString)
@@ -486,7 +498,7 @@ Public Class flow
                     MsgBox("Kein Benutzer angemeldet")
                 End If
             Finally
-                con.Close()
+                'con.Close()
             End Try
             TabControl1.SelectedTab = tpUebersicht
         End If
@@ -503,19 +515,21 @@ Public Class flow
                 End If
             Next
 
-            con.Open()
+            'con.Open()
             If tbStand.Text <> "" Then
                 cmd.CommandText = "INSERT INTO staende (stand, aufgabe, bearbeiter) VALUES ('" & tbStand.Text & "', '" & lblID.Text & "', '" & db.getBenutzerID(benutzer) & "');"
-                cmd.ExecuteNonQuery()
+                'cmd.ExecuteNonQuery()
+                query()
             End If
             cmd.CommandText = "UPDATE aufgaben SET titel = '" & tbTitel.Text & "', beschreibung = '" & tbBeschreibung.Text &
                 "', bearbeiter = '" & db.getBenutzerID(bname) & "', ticketnr = '" & tbTicketNr.Text & "', status = '" & db.getStatusID(cbStatus.SelectedItem) &
                 "', prio = '" & db.getPrioID(cbPrio.SelectedItem) & "', kategorie = '" & db.getKategorieID(cbKategorie.SelectedItem) & "' WHERE aid = " & lblID.Text & ";"
-            cmd.ExecuteNonQuery()
+            'cmd.ExecuteNonQuery()
+            query()
         Catch ex As Exception
             MsgBox(ex.ToString)
         Finally
-            con.Close()
+            'con.Close()
         End Try
         If tbStand.Text <> "" Then
             tbLetzterStand.Text = tbStand.Text
@@ -673,6 +687,9 @@ Public Class flow
             .selectedRowBackColor = Color.FromArgb(26, 145, 26)
             .selectetRowForeColor = Color.Black
         End With
+        If My.Settings.startFullscreen Then
+            Me.WindowState = FormWindowState.Maximized
+        End If
         con.ConnectionString = "server=" & My.Settings.server & ";uid=" & benutzer & ";pwd=" & passwort & ";database=" & My.Settings.datenbank
         cmd.Connection = con
         cmd.CommandType = CommandType.Text
@@ -750,10 +767,33 @@ Public Class flow
             con.Open()
             cmd.ExecuteNonQuery()
             con.Close()
+            ti.Interval = 100
+            PictureBox1.Image = My.Resources.greenCheck
+            ti.Tag = 0
+            ti.Start()
         Catch ex As Exception
+            ti.Interval = 100
+            PictureBox1.Image = My.Resources.redX
+            ti.Tag = 0
+            ti.Start()
             MsgBox(ex.ToString)
         End Try
     End Sub
+    Private Sub ti_Tick() Handles ti.Tick
+        ti.Tag += 1
+        If ti.Tag > 20 Then
+            ti.Tag = 0
+            PictureBox1.Image = Nothing
+            ti.Stop()
+        End If
+    End Sub
 
+    Sub printArray(a As String())
+        Dim s = ""
+        For Each item In a
+            s &= item
+        Next
+        MsgBox(s)
+    End Sub
 
 End Class

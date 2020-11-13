@@ -63,9 +63,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property giphy() As System.Drawing.Bitmap
+        Friend ReadOnly Property greenCheck() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("giphy", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("greenCheck", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -73,41 +73,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property index() As System.Drawing.Bitmap
+        Friend ReadOnly Property redX() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("index", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property istockphoto_1132722559_170667a() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("istockphoto-1132722559-170667a", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property kisspng_check_mark_computer_icons_clip_art_green_tick_5ac32cb7a218e4_237956301522740407664() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("kisspng-check-mark-computer-icons-clip-art-green-tick-5ac32cb7a218e4.237956301522"& _ 
-                        "740407664", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Konfest_PNG_JPG_Image_Pic_Photo_Free_Download_Royalty_Unlimited_clip_art_sticker_Check_Mark_Symbol_Right_Tick_Yes_Green_13() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-"& _ 
-                        "Check-Mark-Symbol-Right-Tick-Yes-Green-13", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("redX", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

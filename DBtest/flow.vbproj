@@ -95,6 +95,11 @@
     <Compile Include="Filter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="schnelleNotizen.Designer.vb">
       <DependentUpon>schnelleNotizen.vb</DependentUpon>
     </Compile>
@@ -119,11 +124,6 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -159,9 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="staendeAnzeigen.resx">
       <DependentUpon>staendeAnzeigen.vb</DependentUpon>
@@ -181,19 +181,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\giphy.gif" />
+    <Content Include="Resources\greenCheck.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\kisspng-check-mark-computer-icons-clip-art-green-tick-5ac32cb7a218e4.237956301522740407664.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\index.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\istockphoto-1132722559-170667a.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-Check-Mark-Symbol-Right-Tick-Yes-Green-13.png" />
+    <Content Include="Resources\redX.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
