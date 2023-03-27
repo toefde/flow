@@ -90,7 +90,6 @@ Public Class Anmeldung
         Catch ex As Exception
             tbbenutzer.BackColor = Color.Red
             tbpasswort.BackColor = Color.Red
-            'MsgBox(ex.ToString)
         Finally
             con.Close()
         End Try
